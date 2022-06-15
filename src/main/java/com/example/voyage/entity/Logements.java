@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
- @AllArgsConstructor
+import java.util.ArrayList;
+import java.util.List;
+
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -16,12 +19,17 @@ public class Logements {
     private String description;
     private String contacte;
     private String email;
-
     // Moyenne des notes
     private Double rating_cache;
-
      //Nombre total de notes
     private int rating_count;
+    private String photo;
+
+    @ManyToOne
+    private VilleTouristique ville;
+
+    @OneToMany(mappedBy = "logement", fetch = FetchType.LAZY)
+    private List<Review> reviews = new ArrayList<Review>();
 
      public String getPhoto() {
          return photo;
@@ -30,11 +38,6 @@ public class Logements {
      public void setPhoto(String photo) {
          this.photo = photo;
      }
-
-     private String photo;
-
-    @ManyToOne
-    private VilleTouristique ville;
 
      public String getEmail() {
          return email;
