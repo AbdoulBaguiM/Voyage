@@ -1,4 +1,4 @@
-package com.example.voyage.entity;
+package com.example.voyage.entities;
 
 import lombok.AllArgsConstructor;
 
@@ -10,14 +10,20 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-
+@Table(name = "natures")
 public class Nature {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String Description ;
+    private String description ;
     private String type ;
     private String map;
     private String photo;
+
+    @ManyToOne
+    @JoinColumn(name = "ville_id")
+    private VilleTouristique ville;
+
     public String getPhoto() {
         return photo;
     }
@@ -25,10 +31,6 @@ public class Nature {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
-
-
-    @ManyToOne
-    private VilleTouristique ville;
 
     public VilleTouristique getVille() {
         return ville;
@@ -55,11 +57,11 @@ public class Nature {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public Long getId() {

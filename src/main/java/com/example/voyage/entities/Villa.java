@@ -1,29 +1,20 @@
-package com.example.voyage.entity;
+package com.example.voyage.entities;
 
 import lombok.AllArgsConstructor;
 
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Villa extends Logements{
+@Table(name = "villas")
+public class Villa extends Logement {
     private boolean piscine;
-
-    private Long nombre_chambre;
+    private Long nombreChambre;
     private boolean jardin;
-
-
-
-    public Long getNombre_chambre() {
-        return nombre_chambre;
-    }
-
-    public void setNombre_chambre(Long nombre_chambre) {
-        this.nombre_chambre = nombre_chambre;
-    }
 
     public boolean isJardin() {
         return jardin;
@@ -33,13 +24,19 @@ public class Villa extends Logements{
         this.jardin = jardin;
     }
 
-
-
     public boolean isPiscine() {
         return piscine;
     }
 
     public void setPiscine(boolean piscine) {
         this.piscine = piscine;
+    }
+
+    public Long getNombreChambre() {
+        return nombreChambre;
+    }
+
+    public void setNombreChambre(Long nombreChambre) {
+        this.nombreChambre = nombreChambre;
     }
 }

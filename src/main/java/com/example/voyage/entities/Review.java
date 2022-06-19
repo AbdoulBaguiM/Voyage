@@ -1,9 +1,10 @@
-package com.example.voyage.entity;
+package com.example.voyage.entities;
 
 import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
+@Table(name = "reviews")
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +17,7 @@ public class Review {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "logement_id", nullable = false)
-    private Logements logement;
+    private Logement logement;
 
     @Column(name = "note", nullable = false)
     private Integer note;
@@ -43,11 +44,11 @@ public class Review {
         this.tourist = tourist;
     }
 
-    public Logements getLogement() {
+    public Logement getLogement() {
         return logement;
     }
 
-    public void setLogement(Logements logement) {
+    public void setLogement(Logement logement) {
         this.logement = logement;
     }
 

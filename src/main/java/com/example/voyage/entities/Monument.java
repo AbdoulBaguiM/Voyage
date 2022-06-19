@@ -1,21 +1,24 @@
-package com.example.voyage.entity;
+package com.example.voyage.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "monuments")
 public class Monument {
     @Id
     private Long id;
     private String nom;
-    private String Historique;
+    private String historique;
     private String photo;
+
+    @ManyToOne
+    @JoinColumn(name = "ville_id")
+    private VilleTouristique ville;
 
     public String getPhoto() {
         return photo;
@@ -24,10 +27,6 @@ public class Monument {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
-
-
-    @ManyToOne
-    private VilleTouristique ville;
 
     public VilleTouristique getVille() {
         return ville;
@@ -38,11 +37,11 @@ public class Monument {
     }
 
     public String getHistorique() {
-        return Historique;
+        return historique;
     }
 
     public void setHistorique(String historique) {
-        Historique = historique;
+        this.historique = historique;
     }
 
     public String getNom() {
