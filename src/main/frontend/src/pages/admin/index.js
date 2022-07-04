@@ -9,8 +9,13 @@ import { TotalCustomers } from '../../components/adminSide/dashboard/total-custo
 import { TotalProfit } from '../../components/adminSide/dashboard/total-profit';
 import { TrafficByDevice } from '../../components/adminSide/dashboard/traffic-by-device';
 import { DashboardLayout } from '../../components/adminSide/dashboard-layout';
+import { getServerSession } from 'next-auth/next';
+import Login from 'src/components/Login';
 
-const Dashboard = () => (
+const Dashboard = ({ session }) => {
+  if(!session) return (<Login/>)
+  
+  return(
   <>
     <Head>
       <title>
@@ -105,7 +110,8 @@ const Dashboard = () => (
       </Container>
     </Box>
   </>
-);
+  )
+};
 
 Dashboard.getLayout = (page) => (
   <DashboardLayout>
@@ -114,3 +120,10 @@ Dashboard.getLayout = (page) => (
 );
 
 export default Dashboard;
+
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context);
+  return {
+    props: { session },
+  };
+}
