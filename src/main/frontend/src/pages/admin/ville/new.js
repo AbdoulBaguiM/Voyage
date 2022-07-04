@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { Avatar, Box, Button, Card, CardActions, CardContent, CardHeader, Container, Divider, Grid, TextField, Typography } from '@mui/material';
-import { DashboardLayout } from '../../../components/dashboard-layout';
+import { DashboardLayout } from '../../../components/adminSide/dashboard-layout';
 import React, {useState} from "react";
 import Router from 'next/router'
 import Uploady from "@rpldy/uploady";

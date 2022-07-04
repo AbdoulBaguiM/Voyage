@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import { AccountProfileDetails } from '../../../components/account/account-profile-details';
-import { DashboardLayout } from '../../../components/dashboard-layout';
+import { AccountProfileDetails } from '../../../components/adminSide/account/account-profile-details';
+import { DashboardLayout } from '../../../components/adminSide/dashboard-layout';
 import React, {useState, useEffect} from "react";
 import {
   Avatar,
@@ -24,7 +24,7 @@ const Account = () => {
     lastName: '',
     email: '',
     telephone: '',
-    pays: '',
+    pays: ''
   });
 
   const DivUploadButton = asUploadButton((props) => {

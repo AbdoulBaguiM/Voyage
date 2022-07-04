@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { Box, Container } from '@mui/material';
-import { VilleListResults } from '../../components/ville/ville-list-results';
-import { VilleListToolbar } from '../../components/ville/ville-list-toolbar';
-import { DashboardLayout } from '../../components/dashboard-layout';
+import { VilleListResults } from '../../components/adminSide/ville/ville-list-results';
+import { VilleListToolbar } from '../../components/adminSide/ville/ville-list-toolbar';
+import { DashboardLayout } from '../../components/adminSide/dashboard-layout';
 
 const Villes = () => {
   return (

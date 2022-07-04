@@ -3,6 +3,7 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useState } from 'react';
 import {
   Box,
   Button,
@@ -10,12 +11,15 @@ import {
   Container,
   FormHelperText,
   Link,
+  Snackbar,
   TextField,
   Typography
 } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AuthService from "../services/auth.service";
+import { HomeNavbar } from 'src/components/clientSide/home-navbar';
 
 const Register = () => {
+  const [message, setMessage] = useState("");
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -68,24 +72,30 @@ const Register = () => {
         )
     }),
     onSubmit: () => {
-      saveUser();
-      router.push('/login');
+      handleRegister();
     }
   });
 
-  const saveUser = async (e) => {
-    const response = await fetch("http://localhost:8080/clients",{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+  const handleRegister = () => {
+    setMessage("");
+    AuthService.register(formik.values.email, 
+      formik.values.name, formik.values.lastName, formik.values.telephone, 
+      formik.values.pays, formik.values.avatar, formik.values.password).then(
+      (response) => {
+        setMessage(response.data.message);
       },
-      body: JSON.stringify(formik.values),
-    });
-
-    if(!response.ok){
-      throw new Error("Une erreur s'est produite");
-    }
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        setMessage(resMessage);
+      }
+    );
   };
+
 
   return (
     <>
@@ -94,6 +104,8 @@ const Register = () => {
           Inscription | Ourairbnb
         </title>
       </Head>
+      <HomeNavbar/>
+      <br/><br/>
       <Box
         component="main"
         sx={{
@@ -104,17 +116,6 @@ const Register = () => {
         }}
       >
         <Container maxWidth="sm">
-          <NextLink
-            href="/"
-            passHref
-          >
-            <Button
-              component="a"
-              startIcon={<ArrowBackIcon fontSize="small" />}
-            >
-              Acceuil
-            </Button>
-          </NextLink>
           <form onSubmit={formik.handleSubmit}>
             <Box sx={{ my: 3 }}>
               <Typography
@@ -129,6 +130,16 @@ const Register = () => {
                 variant="body2"
               >
                 Utilisez votre adresse mail afin de créer un compte
+                {message && (
+                  <div className="form-group">
+                    <div
+                      className={ "alert alert-success" }
+                      role="alert"
+                    >
+                      {message}
+                    </div>
+                  </div>
+                )}
               </Typography>
             </Box>
             <TextField
@@ -275,6 +286,14 @@ const Register = () => {
           </form>
         </Container>
       </Box>
+      {message && (
+                  <Snackbar
+                  open={open}
+                  autoHideDuration={3000}
+                  message={message}
+                />
+                )
+      }
     </>
   );
 };

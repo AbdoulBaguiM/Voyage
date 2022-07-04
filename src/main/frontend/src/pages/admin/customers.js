@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { Box, Container } from '@mui/material';
-import { CustomerListResults } from '../../components/customer/customer-list-results';
-import { CustomerListToolbar } from '../../components/customer/customer-list-toolbar';
-import { DashboardLayout } from '../../components/dashboard-layout';
+import { CustomerListResults } from '../../components/adminSide/customer/customer-list-results';
+import { CustomerListToolbar } from '../../components/adminSide/customer/customer-list-toolbar';
+import { DashboardLayout } from '../../components/adminSide/dashboard-layout';
 
 const Customers = () => {
   return (

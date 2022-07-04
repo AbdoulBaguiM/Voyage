@@ -13,7 +13,7 @@ import {
     TextField,
     Typography
   } from '@mui/material';
-import { DashboardLayout } from '../../../components/dashboard-layout';
+import { DashboardLayout } from '../../../components/adminSide/dashboard-layout';
 import axios from "axios";
 import React, {useState, useEffect} from "react";
 import Router from 'next/router';

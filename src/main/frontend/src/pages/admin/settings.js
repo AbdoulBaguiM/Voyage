@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { Box, Container, Typography } from '@mui/material';
-import { DashboardLayout } from '../../components/dashboard-layout';
-import { SettingsNotifications } from '../../components/settings/settings-notifications';
-import { SettingsPassword } from '../../components/settings/settings-password';
+import { DashboardLayout } from '../../components/adminSide/dashboard-layout';
+import { SettingsNotifications } from '../../components/adminSide/settings/settings-notifications';
+import { SettingsPassword } from '../../components/adminSide/settings/settings-password';
 
 const Settings = () => (
   <>

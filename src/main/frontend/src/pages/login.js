@@ -3,12 +3,15 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Box, Button, Container, Grid, Link, Snackbar, TextField, Typography } from '@mui/material';
 import { Facebook as FacebookIcon } from '../icons/facebook';
 import { Google as GoogleIcon } from '../icons/google';
+import AuthService from "../services/auth.service";
+import { useState } from 'react';
+import { HomeNavbar } from 'src/components/clientSide/home-navbar';
 
 const Login = () => {
+  const [message, setMessage] = useState("");
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -30,15 +33,33 @@ const Login = () => {
           'Veuillez renseigner un mot de passe')
     }),
     onSubmit: () => {
-      router.push('/');
+      handleLogin();
     }
   });
+
+  const handleLogin = () => {
+      AuthService.login(formik.values.email, formik.values.password).then(
+        () => {
+          router.push('/');
+        },
+        (error) => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+          setMessage(resMessage);
+        }
+      );
+  };
 
   return (
     <>
       <Head>
         <title>Connexion | Ourairbnb</title>
       </Head>
+      <HomeNavbar/>
       <Box
         component="main"
         sx={{
@@ -49,17 +70,6 @@ const Login = () => {
         }}
       >
         <Container maxWidth="sm">
-          <NextLink
-            href="/"
-            passHref
-          >
-            <Button
-              component="a"
-              startIcon={<ArrowBackIcon fontSize="small" />}
-            >
-              Acceuil
-            </Button>
-          </NextLink>
           <form onSubmit={formik.handleSubmit}>
             <Box sx={{ my: 3 }}>
               <Typography
@@ -125,6 +135,7 @@ const Login = () => {
                 variant="body1"
               >
                 Se connecter par adresse mail
+
               </Typography>
             </Box>
             <TextField
@@ -189,6 +200,15 @@ const Login = () => {
           </form>
         </Container>
       </Box>
+      {message && (
+                  <Snackbar
+                  open={open}
+                  autoHideDuration={3000}
+                  message={message}
+                />
+                )
+      }
+      
     </>
   );
 };

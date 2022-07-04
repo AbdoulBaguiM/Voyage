@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { Box, Container, Grid, Pagination } from '@mui/material';
-import { ProductListToolbar } from '../../components/logement/product-list-toolbar';
-import { ProductCard } from '../../components/logement/product-card';
-import { DashboardLayout } from '../../components/dashboard-layout';
+import { ProductListToolbar } from '../../components/adminSide/logement/product-list-toolbar';
+import { ProductCard } from '../../components/adminSide/logement/product-card';
+import { DashboardLayout } from '../../components/adminSide/dashboard-layout';
 import axios from "axios";
 import React, {useState, useEffect} from "react";
 

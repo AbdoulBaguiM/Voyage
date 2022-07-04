@@ -12,8 +12,8 @@ public class Review {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tourist_id", nullable = false)
-    private Tourist tourist;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "logement_id", nullable = false)
@@ -36,12 +36,12 @@ public class Review {
         this.id = id;
     }
 
-    public Tourist getTourist() {
-        return tourist;
+    public User getUser() {
+        return user;
     }
 
-    public void setTourist(Tourist tourist) {
-        this.tourist = tourist;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Logement getLogement() {

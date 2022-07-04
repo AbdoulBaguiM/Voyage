@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { DashboardLayout } from '../../../components/dashboard-layout';
+import { DashboardLayout } from '../../../components/adminSide/dashboard-layout';
 import axios from "axios";
 import React, {useState, useEffect} from "react";
 import { useRouter } from 'next/router'
@@ -32,11 +32,12 @@ const Account = () => {
     email: '',
     telephone: '',
     pays: '',
-    avatar: ''
+    avatar: '',
+    role: []
   });
 
   const fetchCustomer = () => {
-    axios.get(`${process.env.API_BASE_URL}/clients/${id}`).then(res => {
+    axios.get(`${process.env.API_BASE_URL}/comptes/${id}`).then(res => {
     setCustomer(res.data);
     });
   };
@@ -72,7 +73,7 @@ const Account = () => {
     e.preventDefault();
     
     
-    const response = await fetch(`${process.env.API_BASE_URL}/clients/` + id, {
+    const response = await fetch(`${process.env.API_BASE_URL}/comptes/` + id, {
       method:"PUT",
       headers: {
         "Content-Type" : "application/json",

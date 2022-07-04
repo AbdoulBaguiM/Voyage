@@ -1,12 +1,17 @@
 package com.example.voyage.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 import javax.persistence.*;
 
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -20,55 +25,15 @@ public class Nature {
     private String map;
     private String photo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ville_id")
+    @JsonBackReference
     private VilleTouristique ville;
 
-    public String getPhoto() {
-        return photo;
+    public Long getVilleId(){
+        return this.ville.getId();
     }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public VilleTouristique getVille() {
-        return ville;
-    }
-
-    public void setVille(VilleTouristique ville) {
-        this.ville = ville;
-    }
-
-    public String getMap() {
-        return map;
-    }
-
-    public void setMap(String map) {
-        this.map = map;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public String getVilleName(){
+        return this.ville.getName();
     }
 }
