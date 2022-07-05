@@ -30,9 +30,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin("*")
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -66,17 +66,16 @@ public class AuthController {
                 userDetails.getAvatar(),
                 roles));
     }
+
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Cette adresse mail est déjà utilisée"));
+                    .ok(new MessageResponse("Cette adresse mail est déjà utilisée"));
         }
         if (userRepository.existsByTelephone(signUpRequest.getTelephone())) {
             return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Ce numéro de télphone est déjà associé à un compte"));
+                    .ok(new MessageResponse("Ce numéro de télphone est déjà associé à un compte"));
         }
         // Create new user's account
         User user = new User();

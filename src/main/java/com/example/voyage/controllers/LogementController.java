@@ -5,6 +5,7 @@ import com.example.voyage.entities.VilleTouristique;
 import com.example.voyage.repositories.LogementRepository;
 import com.example.voyage.repositories.VilleTouristiqueRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -35,12 +36,14 @@ public class LogementController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity createLogement(@RequestBody Logement logement) throws URISyntaxException {
         Logement savedLogement = logementRepository.save(logement);
         return ResponseEntity.created(new URI("/logements/"+savedLogement.getId())).body(savedLogement);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity updateLogement(@PathVariable Long id, @RequestBody Logement logement) {
         Logement currentLogement = logementRepository.findById(id).orElseThrow(RuntimeException::new);
         currentLogement.setSurface(logement.getSurface());
@@ -59,6 +62,7 @@ public class LogementController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity deleteLogement(@PathVariable Long id){
         logementRepository.deleteById(id);
         return ResponseEntity.ok().build();

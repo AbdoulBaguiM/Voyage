@@ -21,6 +21,7 @@ import { HomeNavbar } from 'src/components/clientSide/home-navbar';
 const Register = () => {
   const [message, setMessage] = useState("");
   const router = useRouter();
+  const phoneRegExp = /^(\+212|0)([ \-_/]*)(\d[ \-_/]*){9}/;
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -51,7 +52,7 @@ const Register = () => {
           'Veuillez renseigner votre prénom'),
       telephone: Yup
         .string()
-        .max(255)
+        .matches(phoneRegExp, 'Veuillez respecter le format du numéro de téléphone')
         .required(
           'Veuillez renseigner votre numéro de téléphone'),
       pays: Yup
@@ -61,7 +62,8 @@ const Register = () => {
           'Veuillez renseigner votre pays'),
       password: Yup
         .string()
-        .max(255)
+        .min(6)
+        .max(40)
         .required(
           'Veuillez renseigner un mot de passe'),
       policy: Yup

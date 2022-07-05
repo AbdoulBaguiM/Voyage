@@ -7,6 +7,7 @@ import com.example.voyage.repositories.RoleRepository;
 import com.example.voyage.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,7 @@ public class UserController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public List<User> getUsers(){
         return userRepository.findAll();
     }
@@ -42,6 +44,7 @@ public class UserController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity createUser(@RequestBody User user) throws URISyntaxException {
         user.setPassword(encoder.encode(user.getPassword()));
         Set<Role> strRoles = user.getRoles();
@@ -74,6 +77,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity updateUser(@PathVariable Long id, @RequestBody User user) {
         User currentUser = userRepository.findById(id).orElseThrow(RuntimeException::new);
         currentUser.setName(user.getName());
@@ -89,6 +93,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity deleteUser(@PathVariable Long id){
         userRepository.deleteById(id);
         return ResponseEntity.ok().build();
