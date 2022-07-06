@@ -1,7 +1,6 @@
 package com.example.voyage.controllers;
 
 import com.example.voyage.entities.Logement;
-import com.example.voyage.entities.VilleTouristique;
 import com.example.voyage.repositories.LogementRepository;
 import com.example.voyage.repositories.VilleTouristiqueRepository;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +17,9 @@ import java.util.List;
 public class LogementController {
 
     private final LogementRepository logementRepository;
-    private final VilleTouristiqueRepository villeTouristiqueRepository;
 
-    public LogementController(LogementRepository logementRepository, VilleTouristiqueRepository villeTouristiqueRepository) {
+    public LogementController(LogementRepository logementRepository) {
         this.logementRepository = logementRepository;
-        this.villeTouristiqueRepository = villeTouristiqueRepository;
     }
 
     @GetMapping
@@ -36,14 +33,12 @@ public class LogementController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity createLogement(@RequestBody Logement logement) throws URISyntaxException {
         Logement savedLogement = logementRepository.save(logement);
         return ResponseEntity.created(new URI("/logements/"+savedLogement.getId())).body(savedLogement);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity updateLogement(@PathVariable Long id, @RequestBody Logement logement) {
         Logement currentLogement = logementRepository.findById(id).orElseThrow(RuntimeException::new);
         currentLogement.setSurface(logement.getSurface());
@@ -62,7 +57,6 @@ public class LogementController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity deleteLogement(@PathVariable Long id){
         logementRepository.deleteById(id);
         return ResponseEntity.ok().build();

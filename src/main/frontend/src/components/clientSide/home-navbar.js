@@ -48,7 +48,7 @@ export const HomeNavbar = (props) => {
                 />
                 </a>
             </NextLink>
-            <div style={{ color: "#808080", marginLeft : "20px" }}> <span style={{ fontSize: "25px", fontWeight: "bold" }}>OurAirbnb</span></div>
+            <div style={{ color: "#808080", marginLeft : "20px" }}> <span style={{ fontSize: "25px", fontWeight: "bold" }}>{process.env.APP_NAME}</span></div>
             <Box sx={{ flexGrow: 1 }} />
 
             { currentUser ? 

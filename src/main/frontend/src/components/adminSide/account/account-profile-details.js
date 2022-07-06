@@ -10,6 +10,7 @@ import {
   TextField
 } from '@mui/material';
 import Router from 'next/router'
+import authHeader from 'src/services/auth-header';
 
 
 export const AccountProfileDetails = (props) => {
@@ -40,6 +41,7 @@ export const AccountProfileDetails = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization" : authHeader(),
       },
       body: JSON.stringify(values),
     });

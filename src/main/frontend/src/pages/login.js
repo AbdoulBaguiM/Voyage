@@ -57,7 +57,7 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>Connexion | Ourairbnb</title>
+        <title>Connexion | {process.env.APP_NAME}</title>
       </Head>
       <HomeNavbar/>
       <Box

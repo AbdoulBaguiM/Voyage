@@ -32,14 +32,12 @@ public class MonumentController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity createMonument(@RequestBody Monument monument) throws URISyntaxException {
         Monument savedMonument = monumentRepository.save(monument);
         return ResponseEntity.created(new URI("/monuments/"+savedMonument.getId())).body(savedMonument);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity updateMonument(@PathVariable Long id, @RequestBody Monument monument) {
         Monument currentMonument = monumentRepository.findById(id).orElseThrow(RuntimeException::new);
         currentMonument.setNom(monument.getNom());
@@ -53,7 +51,6 @@ public class MonumentController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity deleteMonument(@PathVariable Long id){
         monumentRepository.deleteById(id);
         return ResponseEntity.ok().build();

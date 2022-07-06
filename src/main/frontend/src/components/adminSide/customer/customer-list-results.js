@@ -21,12 +21,13 @@ import {
   Typography
 } from '@mui/material';
 import { getInitials } from '../../../utils/get-initials';
+import authHeader from 'src/services/auth-header';
 
 export const CustomerListResults = ({...rest }) => {
   const [customers, setCustomers] = useState([]);
 
   const fetchCustomers = () => {
-    axios.get(`${process.env.API_BASE_URL}/comptes`).then(res => {
+    axios.get(`${process.env.API_BASE_URL}/comptes`, { headers: authHeader() }).then(res => {
       setCustomers(res.data);
     });
   };
@@ -84,6 +85,7 @@ export const CustomerListResults = ({...rest }) => {
     e.preventDefault();
     fetch(`${process.env.API_BASE_URL}/comptes/`+ id, {
       method: "DELETE",
+      headers: authHeader(),
     }).then((res) => {
       if(customers) {
         setCustomers((prevElement) => {

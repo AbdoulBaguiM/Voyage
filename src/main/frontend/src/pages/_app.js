@@ -19,7 +19,7 @@ const App = (props) => {
     <CacheProvider value={emotionCache}>
       <Head>
         <title>
-          OurAirbnb
+          Chargement ...
         </title>
         <meta
           name="viewport"

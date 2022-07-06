@@ -32,14 +32,12 @@ public class VilleTouristiqueController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity createVilleTouristique(@RequestBody VilleTouristique villeTouristique) throws URISyntaxException {
         VilleTouristique savedVilleTouristique = villeTouristiqueRepository.save(villeTouristique);
         return ResponseEntity.created(new URI("/villes/"+savedVilleTouristique.getId())).body(savedVilleTouristique);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity updateVilleTouristique(@PathVariable Long id, @RequestBody VilleTouristique villeTouristique) {
         VilleTouristique currentVilleTouristique = villeTouristiqueRepository.findById(id).orElseThrow(RuntimeException::new);
         currentVilleTouristique.setName(villeTouristique.getName());
@@ -57,7 +55,6 @@ public class VilleTouristiqueController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity deleteVilleTouristique(@PathVariable Long id){
         villeTouristiqueRepository.deleteById(id);
         return ResponseEntity.ok().build();

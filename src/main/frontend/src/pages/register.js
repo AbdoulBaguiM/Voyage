@@ -103,7 +103,7 @@ const Register = () => {
     <>
       <Head>
         <title>
-          Inscription | Ourairbnb
+          Inscription | {process.env.APP_NAME}
         </title>
       </Head>
       <HomeNavbar/>
