@@ -32,12 +32,14 @@ public class NatureController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity createNature(@RequestBody Nature nature) throws URISyntaxException {
         Nature savedNature = natureRepository.save(nature);
         return ResponseEntity.created(new URI("/natures/"+savedNature.getId())).body(savedNature);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity updateNature(@PathVariable Long id, @RequestBody Nature nature) {
         Nature currentNature = natureRepository.findById(id).orElseThrow(RuntimeException::new);
         currentNature.setDescription(nature.getDescription());
@@ -52,6 +54,7 @@ public class NatureController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity deleteNature(@PathVariable Long id){
         natureRepository.deleteById(id);
         return ResponseEntity.ok().build();

@@ -22,6 +22,7 @@ import {
   Typography
 } from '@mui/material';
 import { getInitials } from '../../../utils/get-initials';
+import authHeader from 'src/services/auth-header';
 
 export const VilleListResults = ({...rest }) => {
   const [villes, setVilles] = useState([]);
@@ -85,6 +86,7 @@ export const VilleListResults = ({...rest }) => {
     e.preventDefault();
     fetch(`${process.env.API_BASE_URL}/villes/`+ id, {
       method: "DELETE",
+      headers: authHeader(),
     }).then((res) => {
       if(villes) {
         setVilles((prevElement) => {

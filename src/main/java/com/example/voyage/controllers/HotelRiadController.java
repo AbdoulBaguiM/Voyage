@@ -32,12 +32,14 @@ public class HotelRiadController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity createHotelRiad(@RequestBody HotelRiad hotelRiad) throws URISyntaxException {
         HotelRiad savedHotelRiad = hotelRiadRepository.save(hotelRiad);
         return ResponseEntity.created(new URI("/hotels/"+savedHotelRiad.getId())).body(savedHotelRiad);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity updateHotelRiad(@PathVariable Long id, @RequestBody HotelRiad hotelRiad) {
         HotelRiad currentHotelRiad = hotelRiadRepository.findById(id).orElseThrow(RuntimeException::new);
         currentHotelRiad.setName(hotelRiad.getName());
@@ -52,6 +54,7 @@ public class HotelRiadController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity deleteHotelRiad(@PathVariable Long id){
         hotelRiadRepository.deleteById(id);
         return ResponseEntity.ok().build();
