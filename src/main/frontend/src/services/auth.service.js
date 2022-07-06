@@ -1,6 +1,5 @@
 import axios from "axios";
 import Router from "next/router";
-import { Route } from "react-router-dom";
 
 const register = (email, name, lastName, telephone, pays, avatar, password) => {
   return axios

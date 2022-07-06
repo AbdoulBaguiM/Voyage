@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import AuthService from "../services/auth.service";
 import { HomeNavbar } from 'src/components/clientSide/home-navbar';
+import Router from 'next/router';
 
 const Register = () => {
   const [message, setMessage] = useState("");
@@ -85,6 +86,7 @@ const Register = () => {
       formik.values.pays, formik.values.avatar, formik.values.password).then(
       (response) => {
         setMessage(response.data.message);
+        setTimeout(() => {  Router.push('/login'); }, 1500);
       },
       (error) => {
         const resMessage =

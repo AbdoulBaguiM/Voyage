@@ -10,10 +10,14 @@ import {
   Button,
   Card,
   CardActions,
+  Checkbox,
   Container,
   CardContent,
   CardHeader,
   Divider,
+  FormGroup,
+  FormControl,
+  FormControlLabel,
   Grid,
   TextField,
   Typography
@@ -35,6 +39,15 @@ const Account = () => {
     avatar: '',
     roles: []
   });
+
+  const roles = [
+    { "id" : 1, 
+      "name" : "Utilisateur Standard" 
+    },
+    { "id" : 3, 
+      "name" : "Administrateur" 
+    }
+  ];
 
   const fetchCustomer = () => {
     axios.get(`${process.env.API_BASE_URL}/comptes/${id}`, { headers: authHeader() }).then(res => {
@@ -277,6 +290,24 @@ const Account = () => {
                 type="password"
                 onChange={handleChange}
                 variant="outlined"/>
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+            <FormControl sx={{ m: 1 }} component="fieldset" variant="standard">
+            <FormGroup>
+              {roles.map((role) => (
+                 <FormControlLabel
+                   control={
+                     <Checkbox onChange={handleChange}/>
+                   }
+                   label={role.name}
+                 />
+              ))}
+              </FormGroup>
+            </FormControl>
             </Grid>
           </Grid>
         </CardContent>

@@ -5,7 +5,11 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Checkbox,
   Divider,
+  FormGroup,
+  FormControl,
+  FormControlLabel,
   Grid,
   TextField
 } from '@mui/material';
@@ -23,6 +27,14 @@ export const AccountProfileDetails = (props) => {
     roles: []
   });
 
+  const roles = [
+    { "id" : 1, 
+      "name" : "Utilisateur Standard" 
+    },
+    { "id" : 3, 
+      "name" : "Administrateur" 
+    }
+  ];
   
   const handleChange = (event) => {
     setValues({
@@ -157,6 +169,24 @@ export const AccountProfileDetails = (props) => {
                 type="password"
                 onChange={handleChange}
                 variant="outlined"/>
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+            <FormControl sx={{ m: 1 }} component="fieldset" variant="standard">
+            <FormGroup>
+              {roles.map((role) => (
+                 <FormControlLabel
+                   control={
+                     <Checkbox onChange={handleChange}/>
+                   }
+                   label={role.name}
+                 />
+              ))}
+              </FormGroup>
+            </FormControl>
             </Grid>
           </Grid>
         </CardContent>
