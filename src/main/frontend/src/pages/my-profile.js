@@ -22,6 +22,8 @@ import {
 import Uploady from "@rpldy/uploady";
 import { useItemFinishListener } from "@rpldy/uploady";
 import { asUploadButton } from "@rpldy/upload-button";
+import authHeader from 'src/services/auth-header';
+import { getInitials } from 'src/utils/get-initials';
 
 const MyProfile = () => {
     const [checked, setChecked] = useState(false);
@@ -67,6 +69,7 @@ const MyProfile = () => {
             method:"PUT",
             headers: {
             "Content-Type" : "application/json",
+            "Authorized": authHeader().Authorization,
             },
             body : JSON.stringify(customer),
         });
@@ -84,7 +87,7 @@ const MyProfile = () => {
     <>
         <Head>
         <title>
-            Mon Profil | OurAirbnb
+            Mon Profil | {process.env.APP_NAME}
         </title>
         </Head>
         <NavigationComponent/>
@@ -129,7 +132,9 @@ const MyProfile = () => {
                         mb: 2,
                         width: 64
                     }}
-                    />
+                    >
+                        { getInitials(customer.name+' '+customer.lastName) }
+                    </Avatar>
                     <Typography
                     color="textPrimary"
                     gutterBottom

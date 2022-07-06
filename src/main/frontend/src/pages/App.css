@@ -533,7 +533,7 @@
   
   .navbar {
     width: 100%;
-    background-color: 	#FF1493;
+    background-color: 	#7069EA;
     overflow: auto;
   }
   
@@ -549,12 +549,12 @@
   
   /* Navbar links on mouse-over */
   .navbar a:hover {
-    background-color: #000;
+    background-color: #B9B6F5;
   }
   
   /* Current/active navbar link */
   .active {
-    background-color: #04AA6D;
+    background-color: #fff;
   }
   
   /* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
@@ -660,4 +660,12 @@
   }
   .media i:hover{
     background: grey;
+  }
+
+  .appTitle {
+    margin-left: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #7069EA;
   }

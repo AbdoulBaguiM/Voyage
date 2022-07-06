@@ -3,10 +3,10 @@ import styled from '@emotion/styled';
 import { AppBar, Avatar, Badge,Button, Box, IconButton, Toolbar, Tooltip } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Bell as BellIcon } from '../../icons/bell';
-import { UserCircle as UserCircleIcon } from '../../icons/user-circle';
 import { Users as UsersIcon } from '../../icons/users';
 import { Logout as LogoutIcon } from '../../icons/logout';
 import AuthService from "../../services/auth.service";
+import { getInitials } from 'src/utils/get-initials';
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -80,9 +80,8 @@ export const DashboardNavbar = (props) => {
                 width: 40,
                 ml: 1
               }}
-              src="/static/images/avatars/avatar_1.png"
             >
-              <UserCircleIcon fontSize="small" />
+              {getInitials(currentUser?.name + ' ' + currentUser?.lastName)}
             </Avatar>
           </Tooltip>
         </Toolbar>

@@ -30,7 +30,7 @@ const items = [
   },
   {
     href: '/natures',
-    title: 'Natures'
+    title: 'Nature'
   },
   {
     href: '/monuments',

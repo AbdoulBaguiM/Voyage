@@ -20,7 +20,7 @@ export const HomeLayout = (props) => {
     return (
       <>
         <Head>
-          <title>Acceuil | {process.env.APP_NAME}</title>
+          <title>Chargement...</title>
         </Head>
         <HomeLayoutRoot>
           <Box

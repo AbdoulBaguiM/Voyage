@@ -22,10 +22,12 @@ import {
 } from '@mui/material';
 import { getInitials } from '../../../utils/get-initials';
 import authHeader from 'src/services/auth-header';
+import AuthService from 'src/services/auth.service';
 
 export const CustomerListResults = ({...rest }) => {
   const [customers, setCustomers] = useState([]);
-
+  const currentUser = AuthService.getCurrentUser();
+  
   const fetchCustomers = () => {
     axios.get(`${process.env.API_BASE_URL}/comptes`, { headers: authHeader() }).then(res => {
       setCustomers(res.data);
@@ -180,13 +182,16 @@ export const CustomerListResults = ({...rest }) => {
                   <TableCell>
                     {customer.pays}
                   </TableCell>
-                  <TableCell>
+                  {customer.id != currentUser.id ?  
+                    <TableCell>
                     <ButtonGroup>
                       <Button size="sm" color="primary">
                         <Link href={`/admin/customers/${customer.id}`}><EditIcon/></Link></Button>
                       <Button size="sm" color="error" onClick={(e,id) => deleteUser(e,customer.id)}><TrashIcon/></Button>
                     </ButtonGroup>
                   </TableCell>
+                  : ''}
+                  
                 </TableRow>
               ))}
             </TableBody>
