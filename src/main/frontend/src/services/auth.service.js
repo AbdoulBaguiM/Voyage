@@ -47,11 +47,23 @@ if (typeof window !== 'undefined') {
 }
 };
 
+const checkRoles = (roles) => {
+  roles.map((role)=> {
+    if(role["id"] == 1)
+      return true;
+    else
+      if(role["id"] == 3)
+        return true;
+    return false;
+  })
+}
+
 const AuthService = {
   register,
   login,
   logout,
   getCurrentUser,
+  checkRoles,
 };
 
 export default AuthService;

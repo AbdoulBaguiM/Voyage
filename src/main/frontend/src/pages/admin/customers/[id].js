@@ -26,6 +26,7 @@ import Uploady from "@rpldy/uploady";
 import { useItemFinishListener } from "@rpldy/uploady";
 import { asUploadButton } from "@rpldy/upload-button";
 import authHeader from 'src/services/auth-header';
+import AuthService from 'src/services/auth.service';
 
 const Account = () => {
   const router = useRouter()
@@ -298,14 +299,18 @@ const Account = () => {
             >
             <FormControl sx={{ m: 1 }} component="fieldset" variant="standard">
             <FormGroup>
-              {roles.map((role) => (
                  <FormControlLabel
                    control={
-                     <Checkbox onChange={handleChange}/>
+                     <Checkbox checked disabled/>
                    }
-                   label={role.name}
+                   label="Utilisateur standard"
                  />
-              ))}
+                 <FormControlLabel
+                   control={
+                     <Checkbox onChange={handleChange} checked={true}/>
+                   }
+                   label="Administrateur"
+                 />
               </FormGroup>
             </FormControl>
             </Grid>
