@@ -71,11 +71,13 @@ public class AuthController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
-                    .ok(new MessageResponse("Cette adresse mail est déjà utilisée"));
+                    .badRequest()
+                    .body(new MessageResponse("Cette adresse mail est déjà utilisée"));
         }
         if (userRepository.existsByTelephone(signUpRequest.getTelephone())) {
             return ResponseEntity
-                    .ok(new MessageResponse("Ce numéro de télphone est déjà associé à un compte"));
+                    .badRequest()
+                    .body(new MessageResponse("Ce numéro de télphone est déjà associé à un compte"));
         }
         // Create new user's account
         User user = new User();

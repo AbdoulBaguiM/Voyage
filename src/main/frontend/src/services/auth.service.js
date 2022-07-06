@@ -1,5 +1,6 @@
 import axios from "axios";
 import Router from "next/router";
+import { Route } from "react-router-dom";
 
 const register = (email, name, lastName, telephone, pays, avatar, password) => {
   return axios
@@ -25,6 +26,11 @@ const login = (email, password) => {
     .then((response) => {
       if (response.data.accessToken) {
         localStorage.setItem("user", JSON.stringify(response.data));
+        
+        if(response.data.roles.includes('ROLE_ADMIN'))
+          Router.push('/admin');
+        else
+          Router.push('/');
       }
       return response.data;
     });

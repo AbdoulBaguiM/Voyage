@@ -258,7 +258,7 @@ const Register = () => {
             <Box sx={{ py: 2 }}>
               <Button
                 color="primary"
-                disabled={formik.isSubmitting}
+                disabled={!(formik.isValid && formik.dirty)}
                 fullWidth
                 size="large"
                 type="submit"

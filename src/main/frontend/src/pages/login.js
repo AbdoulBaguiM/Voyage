@@ -40,7 +40,6 @@ const Login = () => {
   const handleLogin = () => {
       AuthService.login(formik.values.email, formik.values.password).then(
         () => {
-          router.push('/');
         },
         (error) => {
           const resMessage =
@@ -167,7 +166,7 @@ const Login = () => {
             <Box sx={{ py: 2 }}>
               <Button
                 color="primary"
-                disabled={formik.isSubmitting}
+                disabled={!(formik.isValid && formik.dirty)}
                 fullWidth
                 size="large"
                 type="submit"
