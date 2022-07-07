@@ -10,18 +10,21 @@ const Hotels = () => {
     <Head>
       <title>Hôtels | {process.env.APP_NAME}</title>
     </Head>
-    <NavigationComponent/>
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        py: 8
-      }}
-    >
-      <Container maxWidth={false}>
-        <ComponentHotel/>
-      </Container>
-    </Box>
+    
+    <div style={{marginTop: '30px'}}>
+      <NavigationComponent/>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          py: 8
+        }}
+      >
+        <Container maxWidth={false}>
+          <ComponentHotel/>
+        </Container>
+      </Box>
+    </div>
   </>
   );
 };

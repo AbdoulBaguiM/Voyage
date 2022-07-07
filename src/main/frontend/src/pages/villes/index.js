@@ -10,18 +10,21 @@ const Villes = () => {
     <Head>
       <title>Villes | {process.env.APP_NAME}</title>
     </Head>
-    <NavigationComponent/>
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        py: 8
-      }}
-    >
-      <Container maxWidth={false}>
-        <ComponentVille/>
-      </Container>
+
+    <div style={{marginTop: '30px'}}>
+      <NavigationComponent/>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          py: 8
+        }}
+      >
+        <Container maxWidth={false}>
+          <ComponentVille/>
+        </Container>
     </Box>
+    </div>
   </>
   );
 };

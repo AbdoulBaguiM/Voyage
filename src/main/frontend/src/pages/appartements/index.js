@@ -10,18 +10,21 @@ const Appartements = () => {
     <Head>
       <title>Appartements | {process.env.APP_NAME}</title>
     </Head>
-    <NavigationComponent/>
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        py: 8
-      }}
-    >
-      <Container maxWidth={false}>
-        <ComponentAppart/>
-      </Container>
-    </Box>
+    
+    <div style={{marginTop: '30px'}}>
+      <NavigationComponent/>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          py: 8
+        }}
+      >
+        <Container maxWidth={false}>
+          <ComponentAppart/>
+        </Container>
+      </Box>
+    </div>
   </>
   );
 };

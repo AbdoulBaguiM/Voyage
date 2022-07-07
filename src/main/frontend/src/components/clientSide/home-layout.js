@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { HomeNavbar } from './home-navbar';
 import NFooter from './NFooter';
+import Header from './Header';
 
 const HomeLayoutRoot = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -34,7 +35,7 @@ export const HomeLayout = (props) => {
             {children}
           </Box>
         </HomeLayoutRoot>
-        <HomeNavbar/>
+        <Header/>
         <NFooter/>
       </>
     );

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Box,Divider, Drawer, useMediaQuery } from '@mui/material';
 import { NavItem } from './nav-item';
-import ThemeToggle from '../ThemeToggle';
+
 
 const items = [
   {

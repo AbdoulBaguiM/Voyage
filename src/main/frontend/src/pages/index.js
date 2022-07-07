@@ -12,13 +12,15 @@ const Home = () => {
     <Head>
       <title>Acceuil | {process.env.APP_NAME}</title>
     </Head>
-    <NavigationComponent/>
-    
-    <main>
-      <Explore/>
-      <Banner/>
-      <Cards/>
-    </main>
+    <div style={{marginTop: '130px'}}>
+      <NavigationComponent/>
+      
+      <main>
+        <Explore/>
+        <Banner/>
+        <Cards/>
+      </main>
+    </div>
   </>
   )
 }
