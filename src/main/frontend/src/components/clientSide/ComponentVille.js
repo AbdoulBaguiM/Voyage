@@ -23,12 +23,15 @@ render()
     <div >
    <section className="section-tours" id="tours">
         <div className="container tour-box" data-aos="fade-up">
-          <header className="tour-box__heading">
+        <header className="tour-box__heading">
             <h2 className="heading heading--2 color-blue margin-bottom">
-            QUE FAIRE au Maroc</h2><hr></hr>
+            QUE FAIRE au Maroc <hr></hr>
+            </h2>
             <p>
-            Découvrez la culture marocaine avec Maroc Voyages, site à service complet offrant des circuits à la carte sur mesure et individuels dans tous le Maroc.
-            À l’opposé du tourisme de masse, Maroc Voyages vous propose un appui logistique pour l’organisation de votre séjour au Maroc.
+            Découvrez la culture marocaine avec {process.env.APP_NAME}, site à service 
+            complet offrant des circuits à la carte sur mesure et individuels dans tous le Maroc.
+            À l’opposé du tourisme de masse, {process.env.APP_NAME} vous propose un appui logistique pour l’organisation
+            de votre séjour au Maroc.
             </p>
           </header>
 
@@ -36,7 +39,7 @@ render()
 
 
             {
-                this.state.TableVille.map( ville=>
+            this.state.TableVille.map( ville=>
                 
             <div className="t-card" data-aos="flip-left" data-aos-duration="1000" key={ville.id}>
               <img
@@ -50,21 +53,18 @@ render()
 
               <div className ="t-card__content">
                 <div className="t-card__title">
-                  <h3 className="name"> <i>Bienvenu à</i></h3>
-                  <p className="price"><i><strong className="titre"> {ville.name}</strong> </i></p>
+                  <h5 className="name" style={{color: 'grey'}}> <i>Bienvenue à</i></h5>
+                  <p className="price"><strong className="titre"> {ville.name}</strong></p>
                 </div>
 
                 <div className="t-card__description">
-                <h4><a href={ville.map}>Localisation</a> </h4> <br></ br>
-               <p></p>
+                <h4><a href={ville.map} style={{color: 'blue'}}>Carte</a></h4> <br></ br>
+                <p></p>
                 </div>
 
                 <div className="t-card__items">
-                  <div className="days">Ville</div>
-
                   <div className="likes">
-                	Meteo {	ville.meteo}
-                       
+                	  Météo {	ville.meteo}
                   </div>
                 </div>
               </div>

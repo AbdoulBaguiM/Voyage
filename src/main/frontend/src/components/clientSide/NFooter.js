@@ -1,3 +1,5 @@
+import {Phone, Mail} from "react-feather"
+
 function NFooter() {
     return (
 
@@ -7,7 +9,7 @@ function NFooter() {
             <div className="saww">
             <h1>Pour plus d'infos</h1>
             <p>
-            Pour avoir d'autres informations, rien de plus simple. Inscrivez vous sur notre site, remplissez le formulaire et posez vos questions.
+                Pour avoir d'autres informations, rien de plus simple. Inscrivez vous sur notre site, remplissez le formulaire et posez vos questions.
             </p>
 
             </div>
@@ -33,13 +35,13 @@ function NFooter() {
             <a href="/monuments"><li>Monuments Historiques </li></a>
             </ul></div>
             <div className="saww">
-            <h2>Contact</h2>
+            <h2>Contactez-nous</h2>
             <div className="border"></div>
             <ul>
 
-            <li><i className="fa fa-phone" aria-hidden="true">+212-633325889 </i></li>
-            <li><i className="fa fa-envelope" aria-hidden="true">touriste22@.com</i></li>
-            <li><i className="fa fa-globe" aria-hidden="true">www.maroccult.com</i></li>
+            <li><Phone/> +212-640405050</li>
+            <li><Mail/> {process.env.APP_NAME}@contact.com</li>
+            <li> www.{process.env.APP_NAME}.com</li>
             </ul>
 
             </div>

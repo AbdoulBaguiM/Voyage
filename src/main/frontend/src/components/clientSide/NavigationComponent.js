@@ -2,9 +2,13 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Box,Divider, Drawer, useMediaQuery } from '@mui/material';
 import { NavItem } from './nav-item';
-
+import { Home } from 'react-feather';
 
 const items = [
+  {
+    href: '/',
+    title: 'Acceuil'
+  },
   {
     href: '/hotels',
     title: 'Hôtels'
@@ -75,7 +79,6 @@ export const NavigationComponent = (props) => {
           ))}
         </Box>
         
-        <Divider sx={{ borderColor: '#2D3748' }} />
       </Box>
     </>
   );

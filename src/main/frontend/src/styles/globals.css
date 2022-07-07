@@ -278,4 +278,75 @@ text-decoration: none;
   color: #7069EA;
 }
 
+/* ******************************SECTION APP ************************** */
+.section-tours {
+  background-color: var(--color-gray-light);
+  padding: var(--section-padding);
+}
+
+.tour-box__heading {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.tour-box__cards {
+  display: flex;
+  flex-flow: wrap;
+  grid-template-columns: repeat(
+    var(--three-col-layout),
+    minmax(-webkit-min-content, 1fr)
+  );
+  grid-template-columns: repeat(
+    var(--three-col-layout),
+    minmax(min-content, 1fr)
+  );
+  gap: 3rem;
+}
+
+.t-card {
+  background-color: #fff;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  color: #000;
+  width: 330px;
+}
+.t-card:hover .t-card__img {
+  filter: brightness(0.8);
+}
+.t-card__img {
+  max-width: 100%;
+  width: 100%;
+  height: 200px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.t-card__content {
+  padding: 2.5rem;
+}
+.t-card__content > *:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+.t-card__title {
+  text-align: center;
+  border-bottom: 1px solid;
+}
+.t-card__description {
+  text-align: center;
+}
+.t-card__items {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0.5rem;
+}
+.t-card__items > * {
+  padding: 0.2rem 1rem;
+  background-color: 		#FFC0CB;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 

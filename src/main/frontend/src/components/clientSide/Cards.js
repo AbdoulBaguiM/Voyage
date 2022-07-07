@@ -24,7 +24,7 @@ export default function Cards() {
                 sx={{ mb: 3 }}
                 variant="h4"
               >
-                Découvrez la diversité culturelle
+                Des lieux à couper le souffle
               </Typography>
 
       <div className="cards">

@@ -20,6 +20,7 @@ public class VilleTouristique {
     private String name;
     private Double surface;
     private String meteo;
+    @Column(columnDefinition = "TEXT")
     private String map;
     private String photo;
 

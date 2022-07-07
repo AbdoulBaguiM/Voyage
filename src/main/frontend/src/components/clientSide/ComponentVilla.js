@@ -23,13 +23,14 @@ render()
     <div >
    <section className="section-tours" id="tours">
         <div className="container tour-box" data-aos="fade-up">
-          <header className="tour-box__heading">
+        <header className="tour-box__heading">
             <h2 className="heading heading--2 color-blue margin-bottom">
-            QUE FAIRE au Maroc</h2><hr></hr>
+            QUE FAIRE au Maroc <hr></hr>
+            </h2>
             <p>
-            Découvrez la culture marocaine avec Maroc Voyages, site à service complet offrant des circuits 
-            à la carte sur mesure et individuels dans tous le Maroc.
-            À l’opposé du tourisme de masse, Maroc Voyages vous propose un appui logistique pour l’organisation
+            Découvrez la culture marocaine avec {process.env.APP_NAME}, site à service 
+            complet offrant des circuits à la carte sur mesure et individuels dans tous le Maroc.
+            À l’opposé du tourisme de masse, {process.env.APP_NAME} vous propose un appui logistique pour l’organisation
             de votre séjour au Maroc.
             </p>
           </header>

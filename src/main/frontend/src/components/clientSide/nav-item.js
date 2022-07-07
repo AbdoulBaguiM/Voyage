@@ -2,6 +2,7 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { Box, Button, ListItem } from '@mui/material';
+import { Home, Search, Heart, User } from "react-feather";
 
 export const NavItem = (props) => {
   const { href, title, ...others } = props;
@@ -19,6 +20,7 @@ export const NavItem = (props) => {
       }}
       {...others}
     >
+      
       <NextLink
         href={href}
         passHref
@@ -27,12 +29,12 @@ export const NavItem = (props) => {
           component="a"
           disableRipple
           sx={{
-            backgroundColor: active && 'rgba(255,255,255, 0.08)',
-            borderRadius: 1,
+            backgroundColor: active && 'rgba(255,255,255, 0.2)',
+            borderRadius: 4,
             color: active ? 'secondary.main' : 'neutral.300',
             fontWeight: active && 'fontWeightBold',
             justifyContent: 'flex-start',
-            px: 3,
+            px: 2,
             textAlign: 'left',
             textTransform: 'none',
             width: '100%',

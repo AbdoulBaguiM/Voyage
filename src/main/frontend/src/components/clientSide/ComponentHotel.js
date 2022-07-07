@@ -28,9 +28,9 @@ render()
             QUE FAIRE au Maroc <hr></hr>
             </h2>
             <p>
-            Découvrez la culture marocaine avec Maroc Voyages, site à service 
+            Découvrez la culture marocaine avec {process.env.APP_NAME}, site à service 
             complet offrant des circuits à la carte sur mesure et individuels dans tous le Maroc.
-            À l’opposé du tourisme de masse, Maroc Voyages vous propose un appui logistique pour l’organisation
+            À l’opposé du tourisme de masse, {process.env.APP_NAME} vous propose un appui logistique pour l’organisation
             de votre séjour au Maroc.
             </p>
           </header>
@@ -38,29 +38,21 @@ render()
           <article className="tour-box__cards">
 
 
-            {
-                this.state.TableHotel.map( hotel=>
+          {
+            this.state.TableHotel.map( (hotel) =>
                 
             <div className="t-card" data-aos="flip-left" data-aos-duration="1000" key={hotel.id}>
               <img
                 src={`${process.env.IMAGE_BASE_URL}`+hotel.photo}
-                alt="england"
-                width="500"
-                height="500"
+                alt={hotel.name}
                 className="t-card__img"
               />
               
 
               <div className ="t-card__content">
-                <div className="t-card__title">
-                  <h3 className="name"> <i>Bienvenu à</i></h3>
-                  <p className="price"><i><strong className="titre"> {hotel.name}</strong> </i></p>
-                </div>
 
                 <div className="t-card__description">
-                    <h4> Contact:</h4> <br></ br>
-                    <b>Tél:</b> 0612362548  <br></br>
-                    <b>Email:</b>touristique22@gmail.com
+                    <h4> {hotel.name}</h4> <br></ br>
                 </div>
 
                 <div className="t-card__items">
@@ -74,7 +66,7 @@ render()
               </div>
             </div>)
                 
-}
+          }
                  
           </article>
         </div>
