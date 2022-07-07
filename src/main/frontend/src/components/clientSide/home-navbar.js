@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { AppBar, Avatar, Box, IconButton, Toolbar, Tooltip, Typography } from '@mui/material';
-import { UserCircle, UserCircle as UserCircleIcon } from '../../icons/user-circle';
+import { UserCircle as UserCircleIcon } from '../../icons/user-circle';
 import { Logout as LogoutIcon } from '../../icons/logout';
 import AuthService from "../../services/auth.service";
 import NextLink from 'next/link';
@@ -51,7 +51,7 @@ export const HomeNavbar = (props) => {
             </NextLink>
             <a href='/'  className='appTitle'>{process.env.APP_NAME}</a>
             <Box sx={{ flexGrow: 1 }} />
-
+            
             { currentUser ?
             <a href='/my-profile'>
             <Tooltip title="Mon Profil">
