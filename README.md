@@ -3,7 +3,7 @@
 ## Installation
 
 **Prerequisites**
-*docker* and *docker-compose*
+*docker* and *docker-compose*,
 The images *nextjs-app* and *mysql* that you can pull from DockerHub
 
     docker pull abdelhk/nextjs-app
