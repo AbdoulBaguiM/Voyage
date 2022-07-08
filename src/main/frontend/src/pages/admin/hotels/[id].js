@@ -82,15 +82,16 @@ const Hotel = () => {
 
   const updateHotel = async(e) => {
     e.preventDefault();
-    const response = await api.put('/hotels/' + id,{...hotel})
-                              .catch(function (error) {
-                                if (error.response) {
-                                  // The request was made and the server responded with a status code
-                                  // that falls out of the range of 2xx
-                                  console.log(error.response.data);
-                                  throw new Error("Une erreur s'est produite");
-                                }
-                              });
+    
+    await api.put('/hotels/' + id,{...hotel})
+            .catch(function (error) {
+              if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                throw new Error("Une erreur s'est produite");
+              }
+            });
 
     Router.push('/admin/hotels');
   };

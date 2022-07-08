@@ -92,7 +92,7 @@ public class UserController {
         currentUser.setPassword(encoder.encode(user.getPassword()));
         currentUser.setPays(user.getPays());
         currentUser.setRoles(user.getRoles());
-        currentUser = userRepository.save(user);
+        currentUser = userRepository.save(currentUser);
         return ResponseEntity.ok(currentUser);
     }
 

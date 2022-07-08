@@ -30,10 +30,6 @@ const items = [
     title: 'Villas'
   },
   {
-    href: '/chambres',
-    title: 'Chambres'
-  },
-  {
     href: '/natures',
     title: 'Nature'
   },

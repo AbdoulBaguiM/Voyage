@@ -78,7 +78,7 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                    <finalName>docker-springboot</finalName>
+
                 </configuration>
             </plugin>
         </plugins>

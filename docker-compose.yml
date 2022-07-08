@@ -1,0 +1,50 @@
+version: "3"
+services:
+  #database
+  db:
+    container_name: mysqldb
+    image: mysql
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql-dump:/docker-entrypoint-initdb.d
+    restart: always
+    networks:
+      - backend
+    environment:
+      MYSQL_DATABASE: miola
+      MYSQL_USER: sa
+      MYSQL_PASSWORD: azerty
+      MYSQL_ROOT_PASSWORD: root
+  #backend
+  springboot-app:
+    image: app
+    container_name: backend
+    restart: always
+    build: .
+    ports:
+      - "9090:8082"
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_PORT: 3306
+    depends_on:
+      - db
+    networks:
+      - backend
+      - frontend
+  #frontend
+  nextjs-app:
+    image: nextjs-app
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - springboot-app
+    networks:
+      - frontend
+
+networks:
+  backend:
+  frontend:
