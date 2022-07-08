@@ -3,16 +3,14 @@ import { Box, Container, Grid, Pagination } from '@mui/material';
 import { ProductListToolbar } from '../../../components/adminSide/hotel/product-list-toolbar';
 import { ProductCard } from '../../../components/adminSide/hotel/product-card';
 import { DashboardLayout } from '../../../components/adminSide/dashboard-layout';
-import axios from "axios";
 import React, {useState, useEffect} from "react";
-import authHeader from 'src/services/auth-header';
+import api from 'src/services/api'
 
 const Products = () => {
   const [hotels, setHotels] = useState([]);
 
   const fetchHotels = () => {
-    axios.get(`${process.env.API_BASE_URL}/hotels`).then(res => {
-      console.log(res);
+    api.get('/hotels').then(res => {
       setHotels(res.data);
     });
   };
@@ -23,10 +21,7 @@ const Products = () => {
 
   const deleteHotel = (e,id) => {
     e.preventDefault();
-    fetch(`${process.env.API_BASE_URL}/hotels/`+ id, {
-      method: "DELETE",
-      headers: authHeader(),
-    }).then((res) => {
+    api.delete('/hotels/'+ id).then((res) => {
       if(hotels) {
         setHotels((prevElement) => {
           return prevElement.filter((hotel) => hotel.id !== id);

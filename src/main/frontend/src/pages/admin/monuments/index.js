@@ -3,15 +3,14 @@ import { Box, Container, Grid, Pagination } from '@mui/material';
 import { ProductListToolbar } from '../../../components/adminSide/monument/product-list-toolbar';
 import { ProductCard } from '../../../components/adminSide/monument/product-card';
 import { DashboardLayout } from '../../../components/adminSide/dashboard-layout';
-import axios from "axios";
 import React, {useState, useEffect} from "react";
-import authHeader from 'src/services/auth-header';
+import api from 'src/services/api'
 
 const Products = () => {
   const [monuments, setMonuments] = useState([]);
 
   const fetchMonuments = () => {
-    axios.get(`${process.env.API_BASE_URL}/monuments`).then(res => {
+    api.get('/monuments').then(res => {
       setMonuments(res.data);
     });
   };
@@ -22,10 +21,8 @@ const Products = () => {
 
   const deleteProduct = (e,id) => {
     e.preventDefault();
-    fetch(`${process.env.API_BASE_URL}/monuments/`+ id, {
-      method: "DELETE",
-      headers: authHeader(),
-    }).then((res) => {
+    api.delete('/monuments/'+ id)
+    .then((res) => {
       if(monuments) {
         setMonuments((prevElement) => {
           return prevElement.filter((monument) => monument.id !== id);

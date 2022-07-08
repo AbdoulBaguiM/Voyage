@@ -86,7 +86,10 @@ public class UserController {
         currentUser.setEmail(user.getEmail());
         currentUser.setAvatar(user.getAvatar());
         currentUser.setTelephone(user.getTelephone());
-        currentUser.setPassword(encoder.encode(user.getPassword()));
+
+        if(user.getPassword() != null)
+            currentUser.setPassword(encoder.encode(user.getPassword()));
+
         currentUser.setPays(user.getPays());
         currentUser.setRoles(user.getRoles());
         currentUser = userRepository.save(user);

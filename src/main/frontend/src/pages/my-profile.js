@@ -1,6 +1,5 @@
 import { NavigationComponent } from 'src/components/clientSide/NavigationComponent';
 import { HomeLayout } from 'src/components/clientSide/home-layout';
-import AuthService from 'src/services/auth.service';
 import Router from 'next/router';
 import Head from 'next/head';
 import React, {useState, useEffect} from "react";
@@ -22,12 +21,13 @@ import {
 import Uploady from "@rpldy/uploady";
 import { useItemFinishListener } from "@rpldy/uploady";
 import { asUploadButton } from "@rpldy/upload-button";
-import authHeader from 'src/services/auth-header';
 import { getInitials } from 'src/utils/get-initials';
+import TokenService from 'src/services/token.service';
+import api from 'src/services/api'
 
 const MyProfile = () => {
     const [checked, setChecked] = useState(false);
-    const [customer, setCustomer] = useState(AuthService.getCurrentUser());
+    const [customer, setCustomer] = useState(TokenService.getUser());
     const [message, setMessage] = useState('');
 
     useEffect(() => {
@@ -65,13 +65,8 @@ const MyProfile = () => {
     const updateUser = async(e) => {
         e.preventDefault();
         
-        const response = await fetch(`${process.env.API_BASE_URL}/comptes/` + customer.id, {
-            method:"PUT",
-            headers: {
-            "Content-Type" : "application/json",
-            "Authorized": authHeader().Authorization,
-            },
-            body : JSON.stringify(customer),
+        const response = api.put('/comptes/' + customer.id, {
+            ...customer,
         });
 
         if(!response.ok) {

@@ -1,5 +1,8 @@
 package com.example.voyage.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 @Entity
 @Table(name = "roles")
@@ -10,9 +13,11 @@ public class Role {
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private ERole name;
-    public Role() {
-    }
-    public Role(ERole name) {
+
+    public Role() {}
+
+    @JsonCreator
+    public Role(@JsonProperty("name") ERole name) {
         this.name = name;
     }
     public Integer getId() {

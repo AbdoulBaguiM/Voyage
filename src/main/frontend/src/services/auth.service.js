@@ -1,9 +1,10 @@
-import axios from "axios";
 import Router from "next/router";
+import api from "./api";
+import TokenService from "./token.service";
 
 const register = (email, name, lastName, telephone, pays, avatar, password) => {
-  return axios
-  .post(`${process.env.API_BASE_URL}/auth/signup` , {
+  return api
+  .post('/auth/signup' , {
     email,
     name,
     lastName,
@@ -17,14 +18,14 @@ const register = (email, name, lastName, telephone, pays, avatar, password) => {
 
 
 const login = (email, password) => {
-  return axios
-    .post(`${process.env.API_BASE_URL}/auth/signin`, {
+  return api
+    .post('/auth/signin', {
       email,
       password,
     })
     .then((response) => {
       if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+        TokenService.setUser(response.data);
         
         if(response.data.roles.includes('ROLE_ADMIN'))
           Router.push('/admin');
@@ -36,15 +37,12 @@ const login = (email, password) => {
 };
 
 const logout = () => {
-  localStorage.removeItem("user");
+  TokenService.removeUser();
   Router.push('/');
 };
 
 const getCurrentUser = () => {
-if (typeof window !== 'undefined') {
-    console.log('You are on the browser')
-        return JSON.parse(localStorage.getItem("user"));
-}
+  return TokenService.getUser();
 };
 
 const checkRoles = (roles) => {

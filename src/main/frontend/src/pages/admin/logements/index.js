@@ -5,13 +5,13 @@ import { ProductCard } from '../../../components/adminSide/logement/product-card
 import { DashboardLayout } from '../../../components/adminSide/dashboard-layout';
 import axios from "axios";
 import React, {useState, useEffect} from "react";
-import authHeader from 'src/services/auth-header';
+import api from 'src/services/api'
 
 const Products = () => {
   const [logements, setLogements] = useState([]);
 
   const fetchLogements = () => {
-    axios.get(`${process.env.API_BASE_URL}/logements`).then(res => {
+    api.get('/logements').then(res => {
       setLogements(res.data);
     });
   };
@@ -22,10 +22,7 @@ const Products = () => {
 
   const deleteProduct = (e,id) => {
     e.preventDefault();
-    fetch(`${process.env.API_BASE_URL}/logements/`+ id, {
-      method: "DELETE",
-      headers: authHeader(),
-    }).then((res) => {
+    api.delete('/logements/'+ id).then((res) => {
       if(logements) {
         setLogements((prevElement) => {
           return prevElement.filter((logement) => logement.id !== id);

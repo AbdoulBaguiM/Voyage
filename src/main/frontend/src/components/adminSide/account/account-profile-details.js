@@ -14,7 +14,8 @@ import {
   TextField
 } from '@mui/material';
 import Router from 'next/router'
-import authHeader from 'src/services/auth-header';
+import TokenService from 'src/services/token.service';
+import api from 'src/services/api'
 
 
 export const AccountProfileDetails = (props) => {
@@ -49,18 +50,27 @@ export const AccountProfileDetails = (props) => {
     //Profile picture
     values.avatar=props.avatar;
 
-    const response = await fetch(`${process.env.API_BASE_URL}/auth/signup`,{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization" : authHeader(),
-      },
-      body: JSON.stringify(values),
-    });
+    // const response = await fetch(`${process.env.API_BASE_URL}/auth/signup`,{
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Authorization" : authHeader(),
+    //   },
+    //   body: JSON.stringify(values),
+    // });
 
-    if(!response.ok){
-      throw new Error("Une erreur s'est produite");
-    }
+    // if(!response.ok){
+    //   throw new Error("Une erreur s'est produite");
+    // }
+
+    api.post('/auth/signup',{...values})
+    .catch(function (error) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(error.response.data);
+      }
+    });
     
     Router.push('/admin/customers')
   };

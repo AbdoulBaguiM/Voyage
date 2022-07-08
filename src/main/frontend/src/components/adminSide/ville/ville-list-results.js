@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
-import { format } from 'date-fns';
 import Link from 'next/link';
-import axios from "axios";
 import { Edit as EditIcon } from '../../../icons/edit';
 import { Trash as TrashIcon } from '../../../icons/trash';
 import {
@@ -22,13 +20,13 @@ import {
   Typography
 } from '@mui/material';
 import { getInitials } from '../../../utils/get-initials';
-import authHeader from 'src/services/auth-header';
+import api from 'src/services/api';
 
 export const VilleListResults = ({...rest }) => {
   const [villes, setVilles] = useState([]);
 
   const fetchVilles = () => {
-    axios.get(`${process.env.API_BASE_URL}/villes`).then(res => {
+    api.get('/villes').then(res => {
       setVilles(res.data);
     });
   };
@@ -84,10 +82,8 @@ export const VilleListResults = ({...rest }) => {
 
   const deleteVille = (e,id) => {
     e.preventDefault();
-    fetch(`${process.env.API_BASE_URL}/villes/`+ id, {
-      method: "DELETE",
-      headers: authHeader(),
-    }).then((res) => {
+    api.delete('/villes/'+ id)
+    .then((res) => {
       if(villes) {
         setVilles((prevElement) => {
           return prevElement.filter((ville) => ville.id !== id);

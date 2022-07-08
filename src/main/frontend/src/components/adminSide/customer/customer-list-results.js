@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import axios from "axios";
 import { Edit as EditIcon } from '../../../icons/edit';
 import { Trash as TrashIcon } from '../../../icons/trash';
 import {
@@ -21,15 +20,15 @@ import {
   Typography
 } from '@mui/material';
 import { getInitials } from '../../../utils/get-initials';
-import authHeader from 'src/services/auth-header';
-import AuthService from 'src/services/auth.service';
+import TokenService from 'src/services/token.service';
+import api from 'src/services/api'
 
 export const CustomerListResults = ({...rest }) => {
   const [customers, setCustomers] = useState([]);
-  const currentUser = AuthService.getCurrentUser();
+  const currentUser = TokenService.getUser();
   
   const fetchCustomers = () => {
-    axios.get(`${process.env.API_BASE_URL}/comptes`, { headers: authHeader() }).then(res => {
+    api.get('/comptes').then(res => {
       setCustomers(res.data);
     });
   };
@@ -85,10 +84,8 @@ export const CustomerListResults = ({...rest }) => {
 
   const deleteUser = (e,id) => {
     e.preventDefault();
-    fetch(`${process.env.API_BASE_URL}/comptes/`+ id, {
-      method: "DELETE",
-      headers: authHeader(),
-    }).then((res) => {
+    api.delete(`${process.env.API_BASE_URL}/comptes/`+ id)
+      .then((res) => {
       if(customers) {
         setCustomers((prevElement) => {
           return prevElement.filter((customer) => customer.id !== id);

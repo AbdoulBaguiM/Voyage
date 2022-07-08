@@ -5,13 +5,13 @@ import { ProductCard } from '../../../components/adminSide/nature/product-card';
 import { DashboardLayout } from '../../../components/adminSide/dashboard-layout';
 import axios from "axios";
 import React, {useState, useEffect} from "react";
-import authHeader from 'src/services/auth-header';
+import api from 'src/services/api'
 
 const Products = () => {
   const [natures, setNatures] = useState([]);
 
   const fetchNatures = () => {
-    axios.get(`${process.env.API_BASE_URL}/natures`).then(res => {
+    api.get('/natures').then(res => {
       setNatures(res.data);
     });
   };
@@ -22,10 +22,9 @@ const Products = () => {
 
   const deleteProduct = (e,id) => {
     e.preventDefault();
-    fetch(`${process.env.API_BASE_URL}/natures/`+ id, {
-      method: "DELETE",
-      headers: authHeader(),
-    }).then((res) => {
+    
+    api.delete('/natures/'+ id)
+      .then((res) => {
       if(natures) {
         setNatures((prevElement) => {
           return prevElement.filter((nature) => nature.id !== id);

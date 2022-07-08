@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { DashboardLayout } from '../../../components/adminSide/dashboard-layout';
-import axios from "axios";
 import React, {useState, useEffect} from "react";
 import { useRouter } from 'next/router'
 import Router from 'next/router'
@@ -25,8 +24,7 @@ import {
 import Uploady from "@rpldy/uploady";
 import { useItemFinishListener } from "@rpldy/uploady";
 import { asUploadButton } from "@rpldy/upload-button";
-import authHeader from 'src/services/auth-header';
-import AuthService from 'src/services/auth.service';
+import api from 'src/services/api'
 
 const Account = () => {
   const router = useRouter()
@@ -51,8 +49,8 @@ const Account = () => {
   ];
 
   const fetchCustomer = () => {
-    axios.get(`${process.env.API_BASE_URL}/comptes/${id}`, { headers: authHeader() }).then(res => {
-    setCustomer(res.data);
+    api.get(`/comptes/${id}`).then(res => {
+      setCustomer(res.data);
     });
   };
 
@@ -86,19 +84,14 @@ const Account = () => {
   const updateUser = async(e) => {
     e.preventDefault();
 
-    console.log(authHeader().Authorization);
-    const response = await fetch(`${process.env.API_BASE_URL}/comptes/` + id, {
-      method:"PUT",
-      headers: {
-        "Content-Type" : "application/json",
-        "Authorization" : authHeader().Authorization,
-      },
-      body : JSON.stringify(customer),
-    });
-
-    if(!response.ok) {
-      throw new Error("Une erreur s'est produite");
-    }
+    await api.put('/comptes/' + id, {...customer})
+      .catch(function (error) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          console.log(error.response.data);
+          throw new Error("Une erreur s'est produite");
+        }
+      });
 
     Router.push('/admin/customers');
   };

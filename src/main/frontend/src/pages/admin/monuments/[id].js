@@ -14,14 +14,13 @@ import {
     Typography
   } from '@mui/material';
 import { DashboardLayout } from '../../../components/adminSide/dashboard-layout';
-import axios from "axios";
 import React, {useState, useEffect} from "react";
 import Router from 'next/router';
 import { useRouter } from 'next/router';
 import Uploady from "@rpldy/uploady";
 import { useItemFinishListener } from "@rpldy/uploady";
 import { asUploadButton } from "@rpldy/upload-button";
-import authHeader from 'src/services/auth-header';
+import api from 'src/services/api'
 
 const Monument = () => {
   const router = useRouter()
@@ -33,24 +32,11 @@ const Monument = () => {
     villeId: ''
   });
 
-  const handleChange = (event) => {
-    setMonument({
-      ...monument,
-      [event.target.name]: event.target.value
-    });
-  };
-
   useEffect(()=> {
     const fetchMonument = async () => {
       try {
-        const response = await fetch(`${process.env.API_BASE_URL}/monuments/`+ id, {
-          method: "GET",
-          headers: {
-            "Content-Type" : "applciation/json"
-          },
-        });
-        const _monument = await response.json();
-        setMonument(_monument);
+        const response = await api.get('/monuments/'+ id);
+        setMonument(response.data);
       } catch(error) {
         console.log(error);
       }
@@ -60,6 +46,13 @@ const Monument = () => {
     }
     
 }, [id]);
+
+  const handleChange = (event) => {
+    setMonument({
+      ...monument,
+      [event.target.name]: event.target.value
+    });
+  };
 
 const DivUploadButton = asUploadButton((props) => {
   useItemFinishListener((item) => {
@@ -87,18 +80,16 @@ const DivUploadButton = asUploadButton((props) => {
         id: monument.villeId
       }
     };
-    const response = await fetch(`${process.env.API_BASE_URL}/monuments/` + id, {
-      method:"PUT",
-      headers: {
-        "Content-Type" : "application/json",
-        "Authorization" : authHeader().Authorization,
-      },
-      body : JSON.stringify(bodyForm),
-    });
-
-    if(!response.ok) {
-      throw new Error("Une erreur s'est produite");
-    }
+    
+    await api.post('/monuments/' + id,{...bodyForm})
+            .catch(function (error) {
+              if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                throw new Error("Une erreur s'est produite");
+              }
+            });
 
     Router.push('/admin/monuments');
   };
@@ -106,7 +97,7 @@ const DivUploadButton = asUploadButton((props) => {
   const [states, setStates] = useState([]);
 
   const fetchStates = () => {
-    axios.get(`${process.env.API_BASE_URL}/villes`).then(res => {
+    api.get('/villes').then(res => {
         setStates(res.data);
     });
   };

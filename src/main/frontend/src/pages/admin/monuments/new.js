@@ -20,7 +20,7 @@ import Router from 'next/router';
 import Uploady from "@rpldy/uploady";
 import { useItemFinishListener } from "@rpldy/uploady";
 import { asUploadButton } from "@rpldy/upload-button";
-import authHeader from 'src/services/auth-header';
+import api from 'src/services/api'
 
 const Monument = () => {
   
@@ -65,18 +65,17 @@ const Monument = () => {
         id: monument.ville
       }
     };
-    const response = await fetch(`${process.env.API_BASE_URL}/monuments`,{
-      method: "POST",
-      headers: {
-        "Content-Type" : "application/json",
-        "Authorization": authHeader().Authorization,
-      },
-      body: JSON.stringify(bodyForm),
-    });
+    
+    await api.post('/monuments',{...bodyForm})
+              .catch(function (error) {
+                if (error.response) {
+                  // The request was made and the server responded with a status code
+                  // that falls out of the range of 2xx
+                  console.log(error.response.data);
+                  throw new Error("Une erreur s'est produite");
+                }
+              });
 
-    if(!response.ok){
-      throw new Error("Une erreur s'est produite");
-    }
     Router.push('/admin/monuments')
       
   };
@@ -84,7 +83,7 @@ const Monument = () => {
   const [states, setStates] = useState([]);
 
   const fetchStates = () => {
-    axios.get(`${process.env.API_BASE_URL}/villes`).then(res => {
+    api.get('/villes').then(res => {
         setStates(res.data);
     });
   };
