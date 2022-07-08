@@ -45,8 +45,7 @@ const Nature = () => {
     const fetchNature = async () => {
       try {
         const response = await api.get('/natures/'+ id);
-        const _nature = await response.json();
-        setNature(_nature);
+        setNature(response.data);
       } catch(error) {
         console.log(error);
       }

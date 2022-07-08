@@ -81,7 +81,7 @@ const DivUploadButton = asUploadButton((props) => {
       }
     };
     
-    await api.post('/monuments/' + id,{...bodyForm})
+    await api.post('/monuments/' + id, {...bodyForm})
             .catch(function (error) {
               if (error.response) {
                 // The request was made and the server responded with a status code

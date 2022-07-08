@@ -45,8 +45,7 @@ const Logement = () => {
     const fetchLogement = async () => {
       try {
         const response = await api.get('/logements/'+ id);
-        
-        setLogement(response);
+        setLogement(response.data);
       } catch(error) {
         console.log(error);
       }

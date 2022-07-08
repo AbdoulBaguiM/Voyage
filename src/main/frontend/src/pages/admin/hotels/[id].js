@@ -43,8 +43,7 @@ const Hotel = () => {
         const fetchHotel = async () => {
           try {
             const response = await api.get('/hotels/'+ id);
-            const _hotel = await response.json();
-            setHotel(_hotel);
+            setHotel(response.data);
           } catch(error) {
             console.log(error);
           }
