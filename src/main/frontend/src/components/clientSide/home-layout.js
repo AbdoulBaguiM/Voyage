@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { HomeNavbar } from './home-navbar';
 import NFooter from './NFooter';
 import Header from './Header';
 

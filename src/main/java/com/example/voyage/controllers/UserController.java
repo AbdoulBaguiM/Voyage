@@ -5,6 +5,7 @@ import com.example.voyage.entities.Role;
 import com.example.voyage.entities.User;
 import com.example.voyage.repositories.RoleRepository;
 import com.example.voyage.repositories.UserRepository;
+import com.example.voyage.security.services.RefreshTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,6 +24,8 @@ import java.util.Set;
 public class UserController {
 
     private final UserRepository userRepository;
+    @Autowired
+    RefreshTokenService refreshTokenService;
     @Autowired
     PasswordEncoder encoder;
     @Autowired
@@ -86,10 +89,7 @@ public class UserController {
         currentUser.setEmail(user.getEmail());
         currentUser.setAvatar(user.getAvatar());
         currentUser.setTelephone(user.getTelephone());
-
-        if(user.getPassword() != null)
-            currentUser.setPassword(encoder.encode(user.getPassword()));
-
+        currentUser.setPassword(encoder.encode(user.getPassword()));
         currentUser.setPays(user.getPays());
         currentUser.setRoles(user.getRoles());
         currentUser = userRepository.save(user);
@@ -99,6 +99,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity deleteUser(@PathVariable Long id){
+        refreshTokenService.deleteByUserId(id);
         userRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }

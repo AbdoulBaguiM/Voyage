@@ -31,7 +31,7 @@ const MyProfile = () => {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-      
+
       if(!customer)
         Router.push("/errors/notLoggedIn");
       else {
@@ -64,15 +64,33 @@ const MyProfile = () => {
 
     const updateUser = async(e) => {
         e.preventDefault();
-        
-        const response = api.put('/comptes/' + customer.id, {
-            ...customer,
-        });
 
-        if(!response.ok) {
-            setMessage("Unne erreur s'est produite");
+        let bodyForm = {
+            id: customer.id,
+            name: customer.name,
+            lastName: customer.lastName,
+            email: customer.email,
+            telephone: customer.telephone,
+            avatar: customer.avatar,
+            pays: customer.pays,
+            password: customer.password,
+            roles: [ {
+                id: 1,
+                name: customer.roles[0]
+            }]
         }
 
+        api.put('/comptes/' + customer.id, {...bodyForm,})
+        .catch(function (error) {
+            if (error.response) {
+              // The request was made and the server responded with a status code
+              // that falls out of the range of 2xx
+              console.log(error.response.data);
+              throw new Error("Une erreur s'est produite");
+            }
+          });
+
+        setMessage("Votre profil a été mis à jour avec succès");
         Router.push('/my-profile');
     };
     
@@ -85,6 +103,7 @@ const MyProfile = () => {
             Mon Profil | {process.env.APP_NAME}
         </title>
         </Head>
+        <br/><br/>
         <NavigationComponent/>
         <Box
         component="main"
@@ -269,7 +288,8 @@ const MyProfile = () => {
                     name="password"
                     type="password"
                     onChange={handleChange}
-                    variant="outlined"/>
+                    variant="outlined"
+                    required/>
                 </Grid>
             </Grid>
             </CardContent>
