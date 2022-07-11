@@ -1,20 +1,22 @@
 # Voyage app built with Next.js and Spring Boot
 
+## Description
+Voyage is a travel application built with springboot and nexjs , that will offer tourists the best experience during their trip.
+
 ## Installation
 
-**Prerequisites**
-*docker* and *docker-compose*,
-The images *nextjs-app*, *springnoot-app* and *mysql* that you can pull from DockerHub
+First pull the project by running the following commands.
 
-    docekr puul abdlhk/app
-    docker pull abdelhk/nextjs-app
-    docker pull mysql
+    git clone https://github.com/AbdoulBaguiM/Voyage.git
 
-**Startup**
-After pulling the project, run the following commands in the root of the project (where *docker-compose.yml* exists):
 
-    docker-compose build
-    docker-compose up
+## Run the app
+After pulling the project, run the following commands in the root of the project (where **docker-compose.yml** exists):
+
+    docker-compose up -d
+
+
 
 The web app will be available at:
 http://localhost:3000.
+
