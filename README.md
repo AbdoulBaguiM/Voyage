@@ -19,4 +19,3 @@ After pulling the project, run the following commands in the root of the project
 
 The web app will be available at:
 http://localhost:3000.
-
