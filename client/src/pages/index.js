@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import {NavigationComponent} from '../components/clientSide/NavigationComponent';
-import { HomeLayout } from 'src/components/clientSide/home-layout';
-import {Explore} from 'src/components/clientSide/Explore';
-import {Banner} from 'src/components/clientSide/Banner';
-import Cards from 'src/components/clientSide/Cards';
+import { HomeLayout } from '../components/clientSide/home-layout';
+import {Explore} from '../components/clientSide/Explore';
+import {Banner} from '../components/clientSide/Banner';
+import Cards from '../components/clientSide/Cards';
 
 const Home = () => {
 

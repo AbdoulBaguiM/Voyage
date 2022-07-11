@@ -31,7 +31,7 @@ export default function Cards() {
         {natures.slice(0,4).map((item, index) => (
           <div key={index} className="card">
             <div className="img">
-              <Image
+              <img
                 width={256}
                 height={256}
                 alt={item.description}

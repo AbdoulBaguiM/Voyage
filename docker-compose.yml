@@ -13,15 +13,14 @@ services:
       - backend
     environment:
       MYSQL_DATABASE: miola
-      MYSQL_USER: sa
-      MYSQL_PASSWORD: azerty
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
   #backend
   springboot-app:
     image: abdelhk/app
     container_name: backend
     restart: always
-    build: ./server/
     ports:
       - "9090:8082"
     environment:
@@ -38,7 +37,6 @@ services:
   nextjs-app:
     image: abdelhk/nextjs-app
     container_name: frontend
-    build: ./client/
     ports:
       - "3000:3000"
     depends_on:
