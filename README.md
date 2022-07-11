@@ -5,13 +5,13 @@ Voyage is a travel application built with springboot and nexjs , that will offer
 
 ## Installation
 
-First pull the project by running the following commands.
+First pull the project by running the following command.
 
     git clone https://github.com/AbdoulBaguiM/Voyage.git
 
 
 ## Run the app
-After pulling the project, run the following commands in the root of the project (where **docker-compose.yml** exists):
+After pulling the project, run the following command in the root of the project (where **docker-compose.yml** exists):
 
     docker-compose up -d
 
