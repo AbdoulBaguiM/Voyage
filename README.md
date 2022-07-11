@@ -4,8 +4,9 @@
 
 **Prerequisites**
 *docker* and *docker-compose*,
-The images *nextjs-app* and *mysql* that you can pull from DockerHub
+The images *nextjs-app*, *springnoot-app* and *mysql* that you can pull from DockerHub
 
+    docekr puul abdlhk/app
     docker pull abdelhk/nextjs-app
     docker pull mysql
 

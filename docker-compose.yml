@@ -18,10 +18,10 @@ services:
       MYSQL_ROOT_PASSWORD: root
   #backend
   springboot-app:
-    image: spring-app
+    image: abdelhk/app
     container_name: backend
     restart: always
-    build: .
+    build: ./server/
     ports:
       - "9090:8082"
     environment:
@@ -36,8 +36,9 @@ services:
       - frontend
   #frontend
   nextjs-app:
-    image: nextjs-app
+    image: abdelhk/nextjs-app
     container_name: frontend
+    build: ./client/
     ports:
       - "3000:3000"
     depends_on:
