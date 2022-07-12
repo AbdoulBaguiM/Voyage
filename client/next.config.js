@@ -1,8 +1,8 @@
 module.exports = {
     env: {
       APP_NAME: 'OurAirbnb',
-      API_BASE_URL: 'http://localhost:8082',
-      IMAGE_BASE_URL: 'http://localhost:8082/uploads/files/'
+      API_BASE_URL: 'http://localhost:9090',
+      IMAGE_BASE_URL: 'http://localhost:9090/uploads/files/'
     },
     images: {
       domains: ['localhost'],
