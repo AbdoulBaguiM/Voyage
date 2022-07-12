@@ -1,6 +1,6 @@
 ## [ NextJS-APP ]
 
-[![Administrator dashboard](https://github.com/AbdoulBaguiM/Voyage/blob/main/client/public/static/adminDashboard.png)]
+![Administrator dashboard](https://github.com/AbdoulBaguiM/Voyage/blob/main/client/public/static/adminDashboard.png)
 
 ## Quick start
 
