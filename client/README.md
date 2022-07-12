@@ -1,6 +1,6 @@
 ## [ NextJS-APP ]
 
-[![Administrator dashboard](https://github.com/devias-io/material-kit-react/blob/main/public/static/adminDahsboard.png)]
+[![Administrator dashboard](https://github.com/devias-io/material-kit-react/blob/main/public/static/adminDashboard.png)]
 
 ## Quick start
 
@@ -34,6 +34,11 @@ nextjs-app
 	├── icons
 	├── theme
 	├── utils
+	├── services
+	  ├── api.js
+	  ├── auth.service.js
+	  ├── token.service.js
+	  └── VoyageService.js
 	└── pages
 		└── admin
 			├── appartements
