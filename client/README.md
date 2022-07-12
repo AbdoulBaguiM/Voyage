@@ -34,6 +34,11 @@ nextjs-app
 	├── icons
 	├── theme
 	├── utils
+	├── services
+	  ├── api.js
+	  ├── auth.service.js
+	  ├── token.service.js
+	  ├── VoyageService.js
 	└── pages
 		└── admin
 			├── appartements
