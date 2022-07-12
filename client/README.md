@@ -1,6 +1,6 @@
 ## [ NextJS-APP ]
 
-[![Administrator dashboard](https://github.com/devias-io/material-kit-react/blob/main/public/static/adminDahsboard.png)](https://material-kit-react.devias.io/)
+[![Administrator dashboard](https://github.com/devias-io/material-kit-react/blob/main/public/static/adminDahsboard.png)]
 
 ## Quick start
 
