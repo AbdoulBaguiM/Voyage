@@ -1,16 +1,23 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Box,Divider, Drawer, useMediaQuery } from '@mui/material';
+import { Box, Drawer, useMediaQuery } from '@mui/material';
 import { NavItem } from './nav-item';
 import { Home } from 'react-feather';
+import {Hotel as HotelIcon} from '../../icons/hotel';
+import {Logement as LogementIcon} from '../../icons/logement';
+import {Town as TownIcon} from '../../icons/town';
+import {Leaf as LeafIcon} from '../../icons/leaf';
+import {Map as MapIcon} from '../../icons/map';
 
 const items = [
   {
     href: '/',
+    icon: (<Home />),
     title: 'Acceuil'
   },
   {
     href: '/hotels',
+    icon: (<HotelIcon />),
     title: 'Hôtels'
   },
   {
@@ -19,10 +26,12 @@ const items = [
   },
   {
     href: '/logements',
+    icon: (<LogementIcon/>),
     title: 'Logements'
   },
   {
-    href: 'villes',
+    href: '/villes',
+    icon: (<TownIcon/>),
     title: 'Villes'
   },
   {
@@ -31,10 +40,12 @@ const items = [
   },
   {
     href: '/natures',
+    icon: (<LeafIcon/>),
     title: 'Nature'
   },
   {
     href: '/monuments',
+    icon: (<MapIcon/>),
     title: 'Monuments'
   },
 ];
@@ -65,10 +76,11 @@ export const NavigationComponent = (props) => {
           height: '100%'
         }}
       >
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', backgroundColor: 'white', borderRadius: '15px' }}>
           {items.map((item) => (
             <NavItem
               key={item.title}
+              icon={item.icon}
               href={item.href}
               title={item.title}
             />
@@ -96,7 +108,7 @@ export const NavigationComponent = (props) => {
     //     {content}
     //   </Drawer>
     // );
-    <div className='navbar'>{content}</div>);
+    <div >{content}</div>);
   }
 
   return (

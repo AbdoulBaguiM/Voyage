@@ -138,42 +138,6 @@ section h2 {
   }
 }
 
-/* **************************************NAVBAR STYLE ***************************** */
-  
-.navbar {
-  width: 100%;
-  background-color: 	#7069EA;
-  overflow: auto;
-}
-
-/* Navbar links */
-.navbar a {
-  float: left;
-  text-align: center;
-  padding: 12px;
-  color: white;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-/* Navbar links on mouse-over */
-.navbar a:hover {
-  background-color: #B9B6F5;
-}
-
-/* Current/active navbar link */
-.active {
-  background-color: #fff;
-}
-
-/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
-@media screen and (max-width: 500px) {
-  .navbar a {
-    float: none;
-    display: block;
-  }
-}
-h1{ text-align: center }
 
 /* *****************************************FOOTER STYLE*************************** */
 

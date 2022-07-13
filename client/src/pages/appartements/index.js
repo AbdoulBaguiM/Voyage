@@ -11,7 +11,7 @@ const Appartements = () => {
       <title>Appartements | {process.env.APP_NAME}</title>
     </Head>
     
-    <div style={{marginTop: '30px'}}>
+    <div style={{marginTop: '50px'}}>
       <NavigationComponent/>
       <Box
         component="main"

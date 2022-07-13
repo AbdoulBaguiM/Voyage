@@ -5,7 +5,7 @@ import { Box, Button, ListItem } from '@mui/material';
 import { Home, Search, Heart, User } from "react-feather";
 
 export const NavItem = (props) => {
-  const { href, title, ...others } = props;
+  const { href, icon, title, ...others } = props;
   const router = useRouter();
   const active = href ? (router.pathname === href) : false;
 
@@ -27,19 +27,19 @@ export const NavItem = (props) => {
       >
         <Button
           component="a"
+          startIcon={icon}
           disableRipple
           sx={{
-            backgroundColor: active && 'rgba(255,255,255, 0.2)',
-            borderRadius: 4,
-            color: active ? 'secondary.main' : 'neutral.300',
+            borderBottom: active && '1px solid grey',  
+            color: active ? 'black' : '#808080',
             fontWeight: active && 'fontWeightBold',
             justifyContent: 'flex-start',
-            px: 2,
-            textAlign: 'left',
+            textAlign: 'center',
             textTransform: 'none',
+            borderRadius: '0px',
             width: '100%',
             '& .MuiButton-startIcon': {
-              color: active ? 'secondary.main' : 'neutral.400'
+              color: active ? 'black' : '#808080'
             },
             '&:hover': {
               backgroundColor: 'rgba(255,255,255, 0.08)'
@@ -57,5 +57,6 @@ export const NavItem = (props) => {
 
 NavItem.propTypes = {
   href: PropTypes.string,
+  icon: PropTypes.node,
   title: PropTypes.string
 };
