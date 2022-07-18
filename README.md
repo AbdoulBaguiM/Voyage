@@ -1,7 +1,7 @@
 # Voyage app built with Next.js and Spring Boot
 
 ## Description
-Voyage is a travel application built with springboot and nexjs , that will offer tourists the best experience during their trip.
+Voyage is a travel application built with springboot and nextjs , that will offer tourists the best experience during their trip.
 
 ## Installation
 

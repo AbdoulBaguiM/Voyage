@@ -1,6 +1,7 @@
 package com.example.voyage.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 
 import lombok.Getter;
@@ -35,7 +36,7 @@ public class Logement {
     @JsonBackReference
     private VilleTouristique ville;
 
-    @OneToMany(mappedBy = "logement", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "logement")
     private List<Review> reviews = new ArrayList<Review>();
 
     public Long getVilleId(){

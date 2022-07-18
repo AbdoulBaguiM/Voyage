@@ -1,5 +1,8 @@
 package com.example.voyage.entities;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.time.Instant;
 
@@ -13,10 +16,12 @@ public class Review {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "logement_id", nullable = false)
+    @JsonBackReference
     private Logement logement;
 
     @Column(name = "note", nullable = false)
@@ -27,6 +32,9 @@ public class Review {
 
     @Column(name = "created_at")
     private Instant createdAt;
+
+    @Column(name = "updated_at")
+    private Instant updatedAt;
 
     public Long getId() {
         return id;
@@ -75,5 +83,19 @@ public class Review {
     public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getUserMail(){
+        return this.user.getEmail();
+    }
+
+    public String getUserAvatar() { return this.user.getAvatar(); }
 }
 

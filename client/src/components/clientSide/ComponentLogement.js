@@ -43,7 +43,7 @@ render()
 
             {
                 this.state.TableLogement.map( logement=>
-                
+            <a href={"/logements/"+logement.id}>    
             <div className="t-card" data-aos="flip-left" data-aos-duration="1000" key={logement.id}>
               <img
                 src={`${process.env.IMAGE_BASE_URL}`+logement.photo}
@@ -71,51 +71,52 @@ render()
                 </div>
 
                 <Box sx={{ p: 2 }}>
-      <Grid
-        container
-        spacing={2}
-        sx={{ justifyContent: 'space-between' }}
-      >
-        <Grid
-          item
-          sx={{
-            alignItems: 'center',
-            display: 'flex'
-          }}
-        >
-          <TownIcon color="action" />
-          <Typography
-            color="textSecondary"
-            display="inline"
-            sx={{ pl: 1 }}
-            variant="body2"
-          >
-            {logement.villeName}
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          sx={{
-            alignItems: 'center',
-            display: 'flex'
-          }}
-        >
-          <StarIcon color="action" />
-          <Typography
-            color="textSecondary"
-            display="inline"
-            sx={{ pl: 1 }}
-            variant="body2"
-          >
-            {logement.rating_cache}
-            {' '}
-          </Typography>
-            </Grid>
-            </Grid>
-            </Box>
+                <Grid
+                  container
+                  spacing={2}
+                  sx={{ justifyContent: 'space-between' }}
+                >
+                  <Grid
+                    item
+                    sx={{
+                      alignItems: 'center',
+                      display: 'flex'
+                    }}
+                  >
+                    <TownIcon color="action" />
+                    <Typography
+                      color="textSecondary"
+                      display="inline"
+                      sx={{ pl: 1 }}
+                      variant="body2"
+                    >
+                      {logement.villeName}
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    sx={{
+                      alignItems: 'center',
+                      display: 'flex'
+                    }}
+                  >
+                    <StarIcon color="action" />
+                    <Typography
+                      color="textSecondary"
+                      display="inline"
+                      sx={{ pl: 1 }}
+                      variant="body2"
+                    >
+                      {logement.rating_cache}
+                      {' '}
+                    </Typography>
+                      </Grid>
+                      </Grid>
+                      </Box>
 
               </div>
-            </div>)
+            </div>
+            </a>)
                 
 }
                  
