@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 08 juil. 2022 à 20:43
+-- Généré le : mar. 19 juil. 2022 à 17:35
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `ourairbnb`
+-- Base de données : `miola`
 --
 
 -- --------------------------------------------------------
@@ -35,13 +35,6 @@ CREATE TABLE IF NOT EXISTS `appartements` (
   `id` bigint NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Déchargement des données de la table `appartements`
---
-
-INSERT INTO `appartements` (`agent_securite`, `ascenseur`, `nombre_chambre`, `id`) VALUES
-(b'0', b'1', 3, 10);
 
 -- --------------------------------------------------------
 
@@ -97,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(25);
+(38);
 
 -- --------------------------------------------------------
 
@@ -114,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `hotels_riads` (
   `type` bit(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_k2po5mv43xsm01pd34h5fo6h7` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `hotels_riads`
@@ -123,7 +116,12 @@ CREATE TABLE IF NOT EXISTS `hotels_riads` (
 INSERT INTO `hotels_riads` (`id`, `appreciation`, `name`, `photo`, `type`) VALUES
 (1, 4, 'Hilton', '1656450029236-file.jpg', b'1'),
 (2, 5, 'Mamounia', '1656450089426-file.jpg', b'1'),
-(3, 3, 'Yacout', '1656450136123-file.jpg', b'0');
+(3, 3, 'Yacout', '1656450136123-file.jpg', b'0'),
+(9, 4, 'Ibis Tanger', '1658250942667-file.jpg', b'1'),
+(10, 4, 'Casa Amsterdam', '1658250977624-file.jpg', b'1'),
+(11, 4, 'B&B Hôtel', '1658251008349-file.jpg', b'1'),
+(12, 5, 'Amor Riad', '1658251044208-file.jpg', b'0'),
+(13, 4, 'Al Andalous Riad', '1658251076635-file.jpg', b'0');
 
 -- --------------------------------------------------------
 
@@ -144,16 +142,22 @@ CREATE TABLE IF NOT EXISTS `logements` (
   `ville_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKdvjencsuiki0k243sgtfqqwb1` (`ville_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `logements`
 --
 
 INSERT INTO `logements` (`id`, `contact`, `description`, `email`, `photo`, `rating_cache`, `rating_count`, `surface`, `ville_id`) VALUES
-(1, '08887766', 'Appartement Journalier', 'contact@gmail.com', '1656449868210-file.jpg', 0, 0, 75, 2),
-(2, '078777777', 'Appartement Ocean Marina', 'contact@gmail.com', '1656449914965-file.jpg', 0, 0, 32, 1),
-(10, '656565565', 'azer', 'mail@mail.com', '', 0, 0, 54, 3);
+(1, '08887766', 'Appartement Journalier', 'contact@gmail.com', '1656449868210-file.jpg', 2, 2, 75, 2),
+(2, '078777777', 'Appartement Marina', 'contact@gmail.com', '1656449914965-file.jpg', 3.5, 2, 32, 1),
+(11, '0690909090', 'Jbel Kbir Villa', 'villatanger@gmail.com', '1658250485984-file.jpg', 0, 0, 45, 3),
+(12, '0655550090', 'Duplex Ain Sebaa', 'duplex@gmail.com', '1658250545708-file.jpg', 0, 0, 32, 1),
+(13, '0655446534', 'Résidence Bouskoura', 'bouskoura@gmail.com', '1658250602078-file.jpg', 5, 1, 22, 1),
+(14, '0538987655', 'Duplex Irfane', 'irfaneRes@mail.com', '1658250660291-file.jpg', 0, 0, 12, 2),
+(15, '0640141072', 'Studio Mont fleuri ', 'feslocation@gmail.com', '1658250749456-file.jpg', 0, 0, 10, 8),
+(16, '0567643212', 'Atlas appartement', 'fesLocation@gmail.com', '1658250813039-file.jpg', 0, 0, 22, 8),
+(17, '0677554422', 'Villa Al Omrane', 'irfaneLoc@gmail.com', '1658250876857-file.jpg', 0, 0, 30, 4);
 
 -- --------------------------------------------------------
 
@@ -170,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `monuments` (
   `ville_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK7mopyj3ljr4980onyaecm9kgp` (`ville_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `monuments`
@@ -179,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `monuments` (
 INSERT INTO `monuments` (`id`, `historique`, `nom`, `photo`, `ville_id`) VALUES
 (1, 'Avec sa pierre taillée à la main et son beau marbre, la mosquée Hassan II est l’un des sites incontournables de Casablanca. Des visites guidées sont possibles en dehors des heures de prière, et montrent les coins de la mosquée tels que la salle de prière et le hammam.', 'Mosquée Hassan II', '1656450532001-file.jpg', 1),
 (2, 'La médina la plus grande du monde, ce quartier immense et bien animé mérite au moins une journée pour visiter. Vous y trouverez des mosquées, fontaines, des tanneries et des souks. Réservez un guide pour ne pas vous perdre dans ses petites ruelles qui créent un véritable labyrinthe.', 'Médina de Fès', '1656450589910-file.jpg', 2),
-(6, 'Hist', 'Monum', '', 10);
+(7, 'Le mausolée Mohammed-V est un tombeau royal situé à Rabat, capitale du Maroc. Il se trouve sur l\'esplanade de la tour Hassan et en surplomb de l\'embouchure du fleuve Bouregreg. ', 'Mausolée Mohamed V', '1658251149380-file.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -251,7 +255,20 @@ INSERT INTO `refreshtoken` (`id`, `expiry_date`, `token`, `user_id`) VALUES
 (21, '2022-07-09 15:36:39', 'ac8fff97-985a-4781-bde6-2c833b18138e', 1),
 (22, '2022-07-09 15:43:10', 'd2e439bf-03fa-4f74-ab5c-b63df71c41c2', 1),
 (23, '2022-07-09 16:20:13', '54d11b7b-48bf-4201-b9d5-dc51bafa215c', 1),
-(24, '2022-07-09 18:10:01', '96319202-9f13-4039-a534-45d554464f08', 1);
+(24, '2022-07-09 18:10:01', '96319202-9f13-4039-a534-45d554464f08', 1),
+(25, '2022-07-13 16:26:07', '910fae0d-5c71-4968-9889-a0b9174f07df', 1),
+(26, '2022-07-19 17:31:56', '933005c7-5d09-4569-a2d2-9afc239303cf', 13),
+(27, '2022-07-20 13:37:28', 'fa502f55-a5d4-4455-ae82-c3053c6e5c60', 1),
+(28, '2022-07-20 13:38:13', 'e23e0774-eb55-4592-8762-1e43181b7a7c', 12),
+(29, '2022-07-20 13:49:18', '72a39f63-dda3-43ea-a064-2fa2284cc750', 12),
+(30, '2022-07-20 14:53:39', 'd1867ca1-10ca-432c-bd5c-4ddf445e1d30', 13),
+(31, '2022-07-20 14:55:20', '752bf8b5-2def-4c19-91e9-5ebc6cb995f0', 12),
+(32, '2022-07-20 15:27:16', '0039e1d1-af8a-40fd-94bc-e916b8832b22', 16),
+(33, '2022-07-20 15:29:36', 'bb62249a-114e-4419-9cb5-983f4a272ba6', 12),
+(34, '2022-07-20 15:30:48', 'dee1809b-64fa-47b8-934f-c6e9384e59fc', 16),
+(35, '2022-07-20 15:42:18', 'fe7e97d8-470e-4504-928f-bcca2538ac5c', 12),
+(36, '2022-07-20 17:53:43', '05f3896b-e3ff-48c6-b087-dc3d60447203', 1),
+(37, '2022-07-20 18:31:53', 'c28cbb72-556c-45d2-b28d-74ffcc71131b', 26);
 
 -- --------------------------------------------------------
 
@@ -267,10 +284,22 @@ CREATE TABLE IF NOT EXISTS `reviews` (
   `note` int NOT NULL,
   `logement_id` bigint NOT NULL,
   `user_id` bigint NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK6reyafnxb5l1cett0eqs9xg87` (`logement_id`),
+  UNIQUE KEY `UniqueReviewAndLogement` (`logement_id`,`user_id`),
   KEY `FKcgy7qjc1r99dp117y9en6lxye` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `created_at`, `message`, `note`, `logement_id`, `user_id`, `updated_at`) VALUES
+(1, '2022-07-18 15:37:51', 'Super !!!', 3, 2, 12, '2022-07-18 15:37:51'),
+(2, '2022-07-18 15:52:41', 'J\'ai adoré', 4, 2, 16, '2022-07-18 15:52:41'),
+(7, '2022-07-19 14:52:56', 'Null ', 1, 1, 12, NULL),
+(8, '2022-07-19 14:53:57', 'Cool', 3, 1, 13, '2022-07-19 14:53:57'),
+(10, '2022-07-19 18:33:06', 'Je recommande !!!', 5, 13, 26, NULL);
 
 -- --------------------------------------------------------
 
@@ -360,7 +389,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `UK2p58gbqhxvue2igoderm0gh2c` (`telephone`),
   UNIQUE KEY `UK_6dotkott2kjsp8vw4d0m25fb7` (`email`),
   UNIQUE KEY `UK6dotkott2kjsp8vw4d0m25fb7` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `users`
@@ -368,10 +397,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `avatar`, `email`, `last_name`, `name`, `password`, `pays`, `telephone`) VALUES
 (1, NULL, 'admin@admin.com', NULL, 'admin', '$2a$10$6f7ykiY7wCQokpGy4lxnz.kbydqb/6A3bdeMP2YWWAgmwNWMTe8f6', 'maroc', '0640141070'),
-(12, '1656450634461-file.jpeg', 'mhdabdel151@gmail.com', 'Abdoul Bagui', 'Modifié', '$2a$10$He8YQKUPrGKRlECu/jWYvekvqFzmRwu6m1J4YO.Kp/lGgrE3Fn/aq', 'Maroc', '0640141075'),
+(12, '1658250157374-file.jpeg', 'mhdabdel151@gmail.com', 'Abdoul Bagui', 'Mohamadou', '$2a$10$ptDL9tB9BKi3cxaVik4wiujxlmdz7XgeP3t4q34a.yHAi/0kz2/9u', 'Cameroun', '0640141075'),
 (13, NULL, 'h.ouafae@gmail.com', 'Hdili', 'Ouafae', '$2a$10$rj5eA9OgSuE4vv90wmVAxupBry/3mmZd1byROTMDhF.Zb1jDDyVT6', 'Maroc', '0645654634'),
 (16, NULL, 'halima@gmail.com', 'Maghraoui', 'Halima', '$2a$10$EEC/UeOr8RtcPiEdmf3SCuKbHg2AX0.vT.gn3iuX0rAOw9ixtCT26', 'Maroc', '0655443322'),
-(24, '', 'tes@gmail.com', 'test', 'test', '$2a$10$OV5192mRARxkgA62G5DAWOnKsyNBffhf6tIJi5J4s.uKiNH/39Wbi', 'Maroc', '6565656565');
+(25, '', 'aziza@gmail.com', 'Saufi', 'Aziza', '$2a$10$vPgQ0f2fwDbmZRO0HgvIveipSnYKN3jKr10qc.vDK7q4e/3NcSPvO', 'Maroc', '0678905677'),
+(26, '', 'sara@gmail.com', 'Faqihi', 'Sara', '$2a$10$RMEaYga.oFywCDQT07qA7O7WJ6QBOXGhvLCZXruaB.VRW043XkJd.', 'Maroc', '065456545');
 
 -- --------------------------------------------------------
 
@@ -395,7 +425,8 @@ INSERT INTO `user_roles` (`user_id`, `role_id`) VALUES
 (12, 1),
 (13, 1),
 (16, 1),
-(24, 1),
+(25, 1),
+(26, 1),
 (1, 3);
 
 -- --------------------------------------------------------
@@ -429,7 +460,7 @@ CREATE TABLE IF NOT EXISTS `villes_touristiques` (
   `surface` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_hdfbu375kc2175m1j51ta46at` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `villes_touristiques`
@@ -442,7 +473,8 @@ INSERT INTO `villes_touristiques` (`id`, `map`, `meteo`, `name`, `photo`, `surfa
 (4, 'https://goo.gl/maps/s2q7CMF52515tAG8A', 'Froid', 'Ifrane', '1656449740346-file.jpg', 150),
 (5, 'https://goo.gl/maps/K65Ns2y35Soajfeo7', 'Chaud', 'Marrackech', '1656450162647-file.jpg', 350),
 (8, 'https://goo.gl/maps/XXzrhsbYVuvQ8QcQ9', 'Chaud', 'Fès', '1657129913812-file.jpg', 200),
-(10, 'https://goo.gl/maps/vjSMiCMUADCpcMVD7', 'Cool', 'Agadir', '1657200309485-file.jpg', 65);
+(10, 'https://goo.gl/maps/vjSMiCMUADCpcMVD7', 'Cool', 'Agadir', '1657200309485-file.jpg', 65),
+(12, '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52493.07031762391!2d-1.9074780999999998!3d34.6845705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd7864984106d6ef%3A0x1d86b33244c4650!2sOujda!5e0!3m2!1sfr!2sma!4v1658250292730!5m2!1sfr!2sma\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', 'Cool', 'Oujda', '1658250311689-file.jpg', 90);
 
 --
 -- Contraintes pour les tables déchargées
