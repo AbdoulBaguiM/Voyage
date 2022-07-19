@@ -21,7 +21,7 @@ services:
     restart: always
     ports:
       - "9090:8082"
-    build: .
+    build: ./server/
     environment:
       MYSQL_HOST: mysqldb
       MYSQL_USER: root
