@@ -14,7 +14,10 @@ import {
     Button,
     Avatar
   } from '@mui/material';
+import {Star as StarIcon} from '../../icons/star';
+import {Town as TownIcon} from '../../icons/town';
 import { HomeLayout } from '../../components/clientSide/home-layout';
+import { NavigationComponent } from '../../components/clientSide/NavigationComponent';
 import React, {useState, useEffect} from "react";
 import Router from 'next/router';
 import AuthService from 'src/services/auth.service';
@@ -24,6 +27,7 @@ const Logement = () => {
   const currentUser = AuthService.getCurrentUser();
   const router = useRouter()
   const { id } = router.query
+  
   const [logement, setLogement] = useState({
     description: '',
     photo:'',
@@ -32,10 +36,22 @@ const Logement = () => {
     email:'',
     villeId: ''
   });
+  
+  const [review, setReview] = useState({
+    note: '',
+    message:''
+  });
 
   const handleChange = (event) => {
     setLogement({
       ...logement,
+      [event.target.name]: event.target.value
+    });
+  };
+
+  const handleChangeOnReview = (event) => {
+    setReview({
+      ...review,
       [event.target.name]: event.target.value
     });
   };
@@ -55,33 +71,67 @@ const Logement = () => {
     
 }, [id]);
 
-const [value, setValue] = React.useState(0);
+  const fetchReview = () => {
+    api.get('/reviews/'+currentUser?.id+'/'+logement.id).then(res => {
+        setReview(res.data);
+    });
+  };
+
+  useEffect(()=> {
+    fetchReview();
+  }, [currentUser?.id, logement.id]);
+
+  const [value, setValue] = React.useState(0);
 
   const sendReview = async(e) => {
     e.preventDefault();
-    let bodyForm = {
-      id: logement.id,
-      surface: logement.surface,
-      description: logement.description,
-      email: logement.email,
-      contact: logement.contact,
-      photo: logement.photo,
-      ville: {
-        id: logement.villeId
-      }
-    };
-    
-    await api.put('/logements/' + id, {...bodyForm})
-                              .catch(function (error) {
-                                if (error.response) {
-                                  // The request was made and the server responded with a status code
-                                  // that falls out of the range of 2xx
-                                  console.log(error.response.data);
-                                  throw new Error("Une erreur s'est produite");
-                                }
-                              });
-
-    Router.push('/admin/logements');
+    if(review.id != null){
+      let bodyForm = {
+        id: review.id,
+        note: value,
+        message: review.message,
+        user: {
+          id : currentUser?.id
+        },
+        logement: {
+          id: logement.id
+        }
+      };
+      
+      await api.put('/reviews/' + review.id, {...bodyForm})
+                                .catch(function (error) {
+                                  if (error.response) {
+                                    // The request was made and the server responded with a status code
+                                    // that falls out of the range of 2xx
+                                    console.log(error.response.data);
+                                    throw new Error("Une erreur s'est produite");
+                                  }
+                                });
+  
+    } else {
+      let bodyForm = {
+        note: value,
+        message: review.message,
+        user: {
+          id : currentUser?.id
+        },
+        logement: {
+          id: logement.id
+        }
+      };
+      
+      await api.post('/reviews/', {...bodyForm})
+                                .catch(function (error) {
+                                  if (error.response) {
+                                    // The request was made and the server responded with a status code
+                                    // that falls out of the range of 2xx
+                                    console.log(error.response.data);
+                                    throw new Error("Une erreur s'est produite");
+                                  }
+                                });
+  
+    }
+    Router.reload(window.location.pathname)
   };
 
   return (
@@ -91,6 +141,8 @@ const [value, setValue] = React.useState(0);
         Logement | {process.env.APP_NAME}
       </title>
     </Head>
+    <div style={{marginTop: '50px'}}>
+    <NavigationComponent/>
     <Box
       component="main"
       sx={{
@@ -129,19 +181,49 @@ const [value, setValue] = React.useState(0);
                 width={250}
                 height={250}
                 />
-                <Typography
-                color="textPrimary"
-                gutterBottom
-                variant="h5"
+                 <Box sx={{ p: 2 }}>
+                <Grid
+                  container
+                  spacing={2}
+                  sx={{ justifyContent: 'space-between' }}
                 >
-                {logement.contact}
-                </Typography>
-                <Typography
-                color="textSecondary"
-                variant="body2"
-                >
-                {logement.email}
-                </Typography>
+                  <Grid
+                    item
+                    sx={{
+                      alignItems: 'center',
+                      display: 'flex'
+                    }}
+                  >
+                    <TownIcon color="action" />
+                    <Typography
+                      color="textSecondary"
+                      display="inline"
+                      sx={{ pl: 1 }}
+                      variant="body2"
+                    >
+                      {logement.villeName}
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    sx={{
+                      alignItems: 'center',
+                      display: 'flex'
+                    }}
+                  >
+                    <StarIcon color="action" />
+                    <Typography
+                      color="textSecondary"
+                      display="inline"
+                      sx={{ pl: 1 }}
+                      variant="body2"
+                    >
+                      {logement.rating_cache}
+                      {' '}
+                    </Typography>
+                      </Grid>
+                      </Grid>
+                      </Box>
             </Box>
             </CardContent>
             <Divider />
@@ -180,7 +262,7 @@ const [value, setValue] = React.useState(0);
                     onChange={handleChange}
                     required
                     value={logement.description}
-                    variant="outlined"
+                    variant="standard"
                 />
                 </Grid>
                 <Grid
@@ -190,16 +272,15 @@ const [value, setValue] = React.useState(0);
                 >
                 <TextField
                     fullWidth
-                    label="Surface"
+                    label="Surface (m²)"
                     name="surface"
                     type="number"
-                    inputProps={{ step: "0.01" }}
                     onChange={handleChange}
                     required
                     value={logement.surface}
-                    variant="outlined"
+                    variant="standard"
                     inputProps={
-                        { readOnly: true, }
+                        { readOnly: true, step: "0.01" }
                     }
                 />
                 </Grid>
@@ -215,7 +296,7 @@ const [value, setValue] = React.useState(0);
                     onChange={handleChange}
                     required
                     value={logement.contact}
-                    variant="outlined"
+                    variant="standard"
                     inputProps={
                         { readOnly: true, }
                     }
@@ -233,30 +314,12 @@ const [value, setValue] = React.useState(0);
                     onChange={handleChange}
                     required
                     value={logement.email}
-                    variant="outlined"
+                    variant="standard"
                     inputProps={
                         { readOnly: true, }
                     }
                 />
                 </Grid>
-                <Grid
-                item
-                md={6}
-                xs={12}
-                >
-                <TextField
-                    fullWidth
-                    label="Ville"
-                    name="ville"
-                    onChange={handleChange}
-                    required
-                    value={logement.villeName}
-                    variant="outlined"
-                    inputProps={
-                        { readOnly: true, }
-                    }
-                />
-            </Grid>
             </Grid>
             </CardContent>
             <Divider />
@@ -280,6 +343,12 @@ const [value, setValue] = React.useState(0);
             >
             Reviews
             </Typography>
+            <Typography
+              color="textSecondary"
+              variant="body2"
+            >
+              {logement.rating_count} Review(s) pour ce logement. Dites nous ce que vous en pensez.
+            </Typography> 
             <Grid
             container
             spacing={3}
@@ -310,24 +379,28 @@ const [value, setValue] = React.useState(0);
                                             width: 64
                                         }}
                                         />
+                                        <Typography
+                                          color="textSecondary"
+                                          variant="body2"
+                                          >
+                                          {review.userMail}
+                                        </Typography>
+                                        
                                         <Rating
                                             name="simple-controlled"
                                             value={review.note}
-                                            disabled
+                                            readOnly
                                         />
+                                        
                                         <Typography
                                         color="textPrimary"
                                         gutterBottom
                                         variant="body"
-                                        >
-                                        {review.userMail}
-                                        </Typography>
-                                        <Typography
-                                        color="textSecondary"
-                                        variant="body2"
+                                        sx={{ml:2}}
                                         >
                                         {review.message}
-                                        </Typography>  
+                                        </Typography> 
+            
                                     </Grid>
                                     ))}
                             </Grid>
@@ -354,11 +427,10 @@ const [value, setValue] = React.useState(0);
                                 fullWidth
                                 label="Nom"
                                 name="name"
-                                onChange={handleChange}
+                                onChange={handleChangeOnReview}
                                 required
                                 value={currentUser?.name}
                                 variant="outlined"
-                                disabled
                             />
 
                             </Grid>
@@ -371,9 +443,9 @@ const [value, setValue] = React.useState(0);
                                     fullWidth
                                     label="Message"
                                     name="message"
-                                    onChange={handleChange}
+                                    onChange={handleChangeOnReview}
                                     required
-                                    value=""
+                                    value={review.message}
                                     variant="outlined"
                                 />
                             </Grid>
@@ -422,6 +494,7 @@ const [value, setValue] = React.useState(0);
             </Grid>
         </Container>
     </Box>
+    </div>
   </>
   );
 };

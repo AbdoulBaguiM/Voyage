@@ -1,6 +1,5 @@
 package com.example.voyage.entities;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
@@ -16,12 +15,12 @@ public class Review {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
+    @JsonBackReference(value = "review-user")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "logement_id", nullable = false)
-    @JsonBackReference
+    @JsonBackReference(value = "review-logement")
     private Logement logement;
 
     @Column(name = "note", nullable = false)

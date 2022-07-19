@@ -68,7 +68,8 @@ const Logement = () => {
         id: logement.ville
       }
     };
-    const response = await api.post('/logements',{...bodyForm})
+    
+    await api.post('/logements',{...bodyForm})
                               .catch(function (error) {
                                 if (error.response) {
                                   // The request was made and the server responded with a status code

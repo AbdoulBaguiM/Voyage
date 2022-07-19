@@ -8,6 +8,8 @@ import {Logement as LogementIcon} from '../../icons/logement';
 import {Town as TownIcon} from '../../icons/town';
 import {Leaf as LeafIcon} from '../../icons/leaf';
 import {Map as MapIcon} from '../../icons/map';
+import {Smiley as SmileyIcon} from '../../icons/smiley';
+import {Apps as AppIcon} from '../../icons/apps';
 
 const items = [
   {
@@ -22,6 +24,7 @@ const items = [
   },
   {
     href: '/appartements',
+    icon: (<AppIcon/>),
     title: 'Appartements'
   },
   {
@@ -36,6 +39,7 @@ const items = [
   },
   {
     href: '/villas',
+    icon: (<SmileyIcon/>),
     title: 'Villas'
   },
   {

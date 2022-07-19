@@ -37,6 +37,7 @@ public class Logement {
     private VilleTouristique ville;
 
     @OneToMany(mappedBy = "logement")
+    @JsonManagedReference(value = "review-logement")
     private List<Review> reviews = new ArrayList<Review>();
 
     public Long getVilleId(){
