@@ -45,10 +45,9 @@ public class MonumentController {
         currentMonument.setNom(monument.getNom());
         currentMonument.setHistorique(monument.getHistorique());
         currentMonument.setPhoto(monument.getPhoto());
-        if(monument.getVille().getId() != null)
-            currentMonument.setVille(monument.getVille());
+        currentMonument.setVille(monument.getVille());
 
-        currentMonument = monumentRepository.save(monument);
+        currentMonument = monumentRepository.save(currentMonument);
         return ResponseEntity.ok(currentMonument);
     }
 

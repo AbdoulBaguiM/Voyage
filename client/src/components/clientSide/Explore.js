@@ -27,7 +27,7 @@ export const Explore = () => {
                 Venez explorer
               </Typography>
             <div className="items">
-              {states.slice(0,7).map((item) => (
+              {states.slice(0,8).map((item) => (
                 <div key={item.id} className="item">
                   <div className="img">
                     <Image

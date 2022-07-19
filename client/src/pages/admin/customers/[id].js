@@ -39,15 +39,6 @@ const Account = () => {
     roles: []
   });
 
-  const roles = [
-    { "id" : 1, 
-      "name" : "Utilisateur Standard" 
-    },
-    { "id" : 3, 
-      "name" : "Administrateur" 
-    }
-  ];
-
   const fetchCustomer = () => {
     api.get(`/comptes/${id}`).then(res => {
       setCustomer(res.data);
@@ -68,7 +59,7 @@ const Account = () => {
   const DivUploadButton = asUploadButton((props) => {
     useItemFinishListener((item) => {
       //Set profile pic
-      customer.avatar = item.uploadResponse.data.fileName;  
+      customer.avatar = item.uploadResponse.data.fileName;
     });
   
     return <Button
@@ -284,28 +275,6 @@ const Account = () => {
                 type="password"
                 onChange={handleChange}
                 variant="outlined"/>
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-            <FormControl sx={{ m: 1 }} component="fieldset" variant="standard">
-            <FormGroup>
-                 <FormControlLabel
-                   control={
-                     <Checkbox checked disabled/>
-                   }
-                   label="Utilisateur standard"
-                 />
-                 <FormControlLabel
-                   control={
-                     <Checkbox onChange={handleChange} checked={true}/>
-                   }
-                   label="Administrateur"
-                 />
-              </FormGroup>
-            </FormControl>
             </Grid>
           </Grid>
         </CardContent>

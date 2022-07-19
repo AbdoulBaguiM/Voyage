@@ -17,19 +17,7 @@ export default function Search({ searchResults }) {
   )} | ${format(new Date(router.query.checkIn), "d MMM, yy")} | ${
     router.query.guests
   } guests`;
-  const [selectedLocation, setSelectedLocation] = useState({});
 
-  const coordinates = [...searchResults].slice(1).map((result) => ({
-    longitude: result.long,
-    latitude: result.lat,
-  }));
-  const center = getCenter(coordinates);
-
-  const [viewport, setViewport] = useState({
-    latitude: center.latitude,
-    longitude: center.longitude,
-    zoom: 11,
-  });
   return (
     <>
     <Head>
@@ -46,9 +34,7 @@ export default function Search({ searchResults }) {
         /> */}
         <br/><br/><br/>
         <SearchResults
-          setSelectedLocation={setSelectedLocation}
           results={searchResults}
-          setViewport={setViewport}
         />
       </main>
       <NFooter />

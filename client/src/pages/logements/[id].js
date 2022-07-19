@@ -481,7 +481,7 @@ const Logement = () => {
                                 color="textSecondary"
                                 variant="body2"
                                 >
-                                    Connectez vous afin de laisser une review
+                                    <a href="/login" style={{color: 'blue', textDecoration: 'underline'}}>Connectez vous</a> afin de laisser une review
                                 </Typography>
                                 }
                             
