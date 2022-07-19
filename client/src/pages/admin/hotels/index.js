@@ -4,7 +4,7 @@ import { ProductListToolbar } from '../../../components/adminSide/hotel/product-
 import { ProductCard } from '../../../components/adminSide/hotel/product-card';
 import { DashboardLayout } from '../../../components/adminSide/dashboard-layout';
 import React, {useState, useEffect} from "react";
-import api from 'src/services/api'
+import api from 'src/services/api';
 
 const Products = () => {
   const [hotels, setHotels] = useState([]);

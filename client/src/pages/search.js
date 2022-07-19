@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { format } from "date-fns";
 import { useState } from "react";
 import getCenter from "geolib/es/getCenter";
+import Router from "next/router";
 
 export default function Search({ searchResults }) {
   const router = useRouter();
@@ -55,13 +56,13 @@ export default function Search({ searchResults }) {
   );
 }
 
-export async function getServerSideProps() {
-  const searchResults = await fetch("https://links.papareact.com/isz").then(
-    (data) => data.json()
-  );
-  return {
-    props: {
-      searchResults,
-    },
-  };
+  export async function getServerSideProps({query}) {
+    const searchResults = await fetch(`${process.env.API_BASE_URL}/search/`+query.location).then(
+      (data) => data.json()
+    );
+    return {
+      props: {
+        searchResults,
+      },
+    };
 }

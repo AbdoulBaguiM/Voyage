@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VilleTouristiqueRepository extends JpaRepository<VilleTouristique,Long> {
+
+    VilleTouristique findVilleTouristiqueByName(String villeName);
 }

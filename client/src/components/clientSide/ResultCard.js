@@ -3,14 +3,14 @@ import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { Star, Heart } from "react-feather";
 export default function ResultCard({
-  imgSrc,
   location,
-  title,
+  surface,
   description,
-  star,
-  total,
-  price,
-  lat,
+  contact,
+  email,
+  rating_cache,
+  rating_count,
+  photo,
   onClick,
 }) {
   const [liked, setLiked] = useState(false);
@@ -24,33 +24,29 @@ export default function ResultCard({
   const handleScroll = (e) =>
     setCurrSlide(Math.round(e.target.scrollLeft / e.target.offsetWidth));
 
+  const [loading, setLoading] = useState(true);
+  
   useEffect(() => {
     const imagesRefCurr = imagesRef.current;
     imagesRefCurr.addEventListener("scroll", handleScroll);
     return () => imagesRefCurr.removeEventListener("scroll", handleScroll);
   }, []);
 
+
   return (
     <CardDiv onClick={onClick}>
       <div ref={imagesRef} className="carousel">
-        {imgSrc.map((url, index) => (
-          <ImageComponent key={index} url={url} location={location} />
-        ))}
-      </div>
-      {imgSrc?.length > 1 && (
-        <div className="scroller">
-          {imgSrc.map((img, idx) => (
-            <span
-              key={idx}
-              className={currSlide === idx ? "active" : null}
-              onClick={(e) => {
-                e.stopPropagation();
-                scrollToImage(idx);
-              }}
-            ></span>
-          ))}
+        <div className={`img ${loading ? "loading" : null}`}>
+          <Image
+            layout="fill"
+            alt={location}
+            objectFit="cover"
+            src={`${process.env.IMAGE_BASE_URL}`+ photo}
+            onLoadingComplete={() => setLoading(false)}
+          />
         </div>
-      )}
+      </div>
+      
       <Heart
         className={`heart ${liked ? "liked" : null}`}
         onClick={(e) => {
@@ -61,24 +57,25 @@ export default function ResultCard({
 
       <div className="details">
         <div className="rating">
-          <Star className="star" /> {star}{" "}
-          <small>({String(lat).split(".")[1].substring(0, 3)})</small>
+          <Star className="star" /> {rating_cache}{" "}
+          <small>({rating_count})</small>
         </div>
-        <p className="subtitle">{location}</p>
-        <h2>{title}</h2>
-        <p className="description">{description}</p>
-        <p className="price">
+        <p className="subtitle">{''}</p>
+        <h2>{description}</h2>
+        <p className="description">{email}</p>
+        <p className="description">{contact}</p>
+        {/* <p className="price">
           <span>
             {price.split(" ")[0]} <small>/night</small>
           </span>
           <span className="total">{total}</span>
-        </p>
+        </p> */}
       </div>
     </CardDiv>
   );
 }
 
-const ImageComponent = ({ index, url, location }) => {
+const ImageComponent = ({ index, photo, location }) => {
   const [loading, setLoading] = useState(true);
 
   return (
@@ -87,7 +84,7 @@ const ImageComponent = ({ index, url, location }) => {
         layout="fill"
         alt={location}
         objectFit="cover"
-        src={`/images/results/${url}`}
+        src={`${process.env.IMAGE_BASE_URL}`+ photo}
         onLoadingComplete={() => setLoading(false)}
       />
     </div>

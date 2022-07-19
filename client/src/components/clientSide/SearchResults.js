@@ -29,7 +29,7 @@ export default function SearchResults({
     <ResultsDiv className="hero">
       <div className="inner">
         <p className="details">
-          300+ logements - <span className="date">{checkInDate}</span> à{" "}
+          {results.length}+ logements - <span className="date">{checkInDate}</span> à{" "}
           <span className="date">{checkOutDate}</span> pour {router.query.guests}{" "}
           personnes
         </p>
@@ -43,14 +43,16 @@ export default function SearchResults({
 
         <div className="results">
           {results.map((item, index) => (
+            <a href={'/logements/'+item.id}>
             <ResultCard
               onClick={() =>
-                setSelection({ lat: item.lat, long: item.long, index: index })
+                setSelection({ ...item })
               }
               {...item}
               imgSrc={resultImages[index]}
               key={index}
             />
+            </a>
           ))}
         </div>
 
