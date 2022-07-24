@@ -19,3 +19,5 @@ After pulling the project, run the following command in the root of the project 
 
 The web app will be available at:
 http://localhost:3000.
+
+![Landing Page](https://github.com/AbdoulBaguiM/Voyage/blob/main/client/public/static/landingPage.png)
